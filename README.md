@@ -7,7 +7,7 @@ Interfejs jest po polsku, a dokumenty powstają po niemiecku. Działa w przeglą
 
 ## Co potrafi
 - Przewodnik przy pierwszym uruchomieniu: język aplikacji, język dokumentów, branża, dane firmy, podatki, konto bankowe, logo z instrukcją.
-- Interfejs po polsku, niemiecku i angielsku (`i18n.js`). Język dokumentu wybierany osobno dla każdej faktury i oferty.
+- Interfejs w 7 językach: PL, DE, EN (`i18n.js`) oraz TR, RU, IT, FR (`i18n-more.js`). Język dokumentu wybierany osobno dla każdej faktury i oferty.
 - Logo jest automatycznie przycinane z białych marginesów.
 - Profil firmy z logo, numerem podatkowym i kontem bankowym.
 - Lista klientów, z podziałem na osoby prywatne i firmy.
@@ -28,7 +28,8 @@ Interfejs jest po polsku, a dokumenty powstają po niemiecku. Działa w przeglą
 | `app.js` | cała logika aplikacji |
 | `styles.css` | wygląd aplikacji i wydruku A4 |
 | `templates.js` | szablony branżowe w 3 językach – tu dopisujesz nowe branże |
-| `i18n.js` | wszystkie tłumaczenia aplikacji i dokumentów |
+| `i18n.js`, `i18n-more.js` | tłumaczenia aplikacji i dokumentów |
+| `templates-i18n.js` | szablony branżowe po turecku, rosyjsku, włosku i francusku |
 | `sw.js` | tryb offline (przy zmianach podbij `VERSION`) |
 
 Aplikacja nie wymaga budowania ani instalacji: zwykłe pliki HTML, CSS i JS.

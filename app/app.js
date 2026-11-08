@@ -35,7 +35,7 @@
   function fmtDate(iso, lang) {
     if (!iso) return '';
     var p = iso.split('-');
-    return lang === 'en' ? p[2] + '/' + p[1] + '/' + p[0] : p[2] + '.' + p[1] + '.' + p[0];
+    return ['en', 'fr', 'it'].indexOf(lang) > -1 ? p[2] + '/' + p[1] + '/' + p[0] : p[2] + '.' + p[1] + '.' + p[0];
   }
   var moneyF = {}, numF = {};
   function money(n, lang) {
@@ -88,8 +88,15 @@
   function dt(lang, key, vars) { var s = (window.DOC[lang] || window.DOC.de)[key]; return fill(s, vars); }
   function unitLabel(u, lang) { var m = window.UNITS[u]; return (m && m[lang]) || u; }
   function tplItems(v, lang) {
-    var col = { de: 0, pl: 1, en: 2 }[lang] || 0;
-    return v.items.map(function (r) { return { name: r[col] || r[0], unit: r[3], price: r[4], type: r[5] }; });
+    var col = { de: 0, pl: 1, en: 2 }[lang], extra = (window.TPL_LANG_COL || {})[lang];
+    return v.items.map(function (r) {
+      var name = col != null ? r[col] : (extra != null && window.TPL_I18N[r[0]] ? window.TPL_I18N[r[0]][extra] : '');
+      return { name: name || r[0], unit: r[3], price: r[4], type: r[5] };
+    });
+  }
+  function branchName(v) {
+    var l = uiLang();
+    return v.name[l] || ((window.VORLAGEN_NAMES || {})[v.id] || {})[l] || v.name.en;
   }
   function tplById(id) { return window.VORLAGEN.filter(function (x) { return x.id === id; })[0]; }
 
@@ -172,7 +179,7 @@
   }
   function input(attr, value) { return '<input ' + attr + ' value="' + esc(value) + '">'; }
   function langOptions(sel) {
-    return Object.keys(window.LANGS).map(function (k) {
+    return LANG_ORDER.map(function (k) {
       var L = window.LANGS[k];
       return '<option value="' + k + '"' + (sel === k ? ' selected' : '') + '>' + L.flag + ' ' + L.name + '</option>';
     }).join('');
@@ -210,6 +217,8 @@
   window.addEventListener('hashchange', route);
 
   // ---------- Przewodnik (pierwsze uruchomienie) ----------
+  var LANG_ORDER = ['pl', 'de', 'en', 'tr', 'ru', 'it', 'fr'].filter(function (k) { return window.LANGS[k]; });
+  var DOC_ORDER = ['de', 'en', 'pl', 'tr', 'ru', 'it', 'fr'].filter(function (k) { return window.LANGS[k] && window.DOC[k]; });
   var WZ_STEPS = ['lang', 'doclang', 'branch', 'company', 'tax', 'bank', 'logo', 'done'];
   var wz = { step: 0, copy: true };
   function renderWizard() {
@@ -218,14 +227,14 @@
     var h = '<div class="wz"><div class="wz-top"><div class="wz-bar"><i style="width:' + Math.round((wz.step + 1) / n * 100) + '%"></i></div>' +
       '<small class="muted">' + t('wz_step', { a: wz.step + 1, b: n }) + '</small></div>';
     if (s === 'lang') {
-      h += '<h1>' + t('wz_lang_t') + '</h1><p>' + t('wz_lang_p') + '</p><div class="wz-choices">' +
-        Object.keys(window.LANGS).map(function (k) {
+      h += '<h1>' + t('wz_lang_t') + '</h1><p>' + t('wz_lang_p') + '</p><div class="wz-choices two">' +
+        LANG_ORDER.map(function (k) {
           var L = window.LANGS[k];
           return '<button class="wz-choice' + (uiLang() === k ? ' on' : '') + '" data-act="wz-lang" data-v="' + k + '"><span class="big">' + L.flag + '</span>' + L.name + '</button>';
         }).join('') + '</div>';
     } else if (s === 'doclang') {
-      h += '<h1>' + t('wz_doc_t') + '</h1><p>' + t('wz_doc_p') + '</p><div class="wz-choices">' +
-        ['de', 'en', 'pl'].map(function (k) {
+      h += '<h1>' + t('wz_doc_t') + '</h1><p>' + t('wz_doc_p') + '</p><div class="wz-choices two">' +
+        DOC_ORDER.map(function (k) {
           var L = window.LANGS[k];
           return '<button class="wz-choice' + (S.settings.docLang === k ? ' on' : '') + '" data-act="wz-doclang" data-v="' + k + '"><span class="big">' + L.flag + '</span>' + L.name +
             '<small>' + esc(dt(k, 'invoice')) + ' · ' + esc(dt(k, 'offer')) + '</small></button>';
@@ -233,7 +242,7 @@
     } else if (s === 'branch') {
       h += '<h1>' + t('wz_branch_t') + '</h1><p>' + t('wz_branch_p') + '</p><div class="wz-grid">' +
         window.VORLAGEN.map(function (v) {
-          return '<button class="wz-choice small' + (c.branche === v.id ? ' on' : '') + '" data-act="wz-branch" data-v="' + v.id + '"><span class="big">' + v.icon + '</span>' + esc(v.name[uiLang()]) + '</button>';
+          return '<button class="wz-choice small' + (c.branche === v.id ? ' on' : '') + '" data-act="wz-branch" data-v="' + v.id + '"><span class="big">' + v.icon + '</span>' + esc(branchName(v)) + '</button>';
         }).join('') + '</div>' +
         '<label class="check"><input type="checkbox" id="wz-copy"' + (wz.copy ? ' checked' : '') + '> ' + t('wz_branch_copy') + '</label>';
     } else if (s === 'company') {
@@ -415,7 +424,7 @@
     pickerLang = d.lang;
     var m = document.getElementById('modal');
     var opts = '<option value="mine"' + (pickerSrc === 'mine' ? ' selected' : '') + '>' + t('my_items_opt', { n: S.items.length }) + '</option>' +
-      window.VORLAGEN.map(function (v) { return '<option value="' + v.id + '"' + (pickerSrc === v.id ? ' selected' : '') + '>' + v.icon + ' ' + esc(v.name[uiLang()]) + '</option>'; }).join('');
+      window.VORLAGEN.map(function (v) { return '<option value="' + v.id + '"' + (pickerSrc === v.id ? ' selected' : '') + '>' + v.icon + ' ' + esc(branchName(v)) + '</option>'; }).join('');
     m.innerHTML = '<div class="sheet"><div class="sheet-head"><h2>' + t('add_items') + '</h2><button class="icon" data-act="closemodal">✕</button></div>' +
       '<select id="pk-src">' + opts + '</select><input id="pk-q" placeholder="' + t('search') + '" autocomplete="off">' +
       '<div id="pk-list" class="pk-list"></div><button class="btn primary big" data-act="closemodal">' + t('done') + '</button></div>';
@@ -573,7 +582,7 @@
         money(it.price) + '/' + esc(unitLabel(it.unit, uiLang())) + '</b></a>';
     }).join('');
     h += '<h2 class="sec">' + t('templates') + '</h2><select data-act="tplsel">' + window.VORLAGEN.map(function (x) {
-      return '<option value="' + x.id + '"' + (x.id === v.id ? ' selected' : '') + '>' + x.icon + ' ' + esc(x.name[uiLang()]) + '</option>';
+      return '<option value="' + x.id + '"' + (x.id === v.id ? ' selected' : '') + '>' + x.icon + ' ' + esc(branchName(x)) + '</option>';
     }).join('') + '</select>';
     h += '<p class="muted small">' + t('tpl_note') + ' ' + window.LANGS[S.settings.docLang].flag + '</p>';
     h += '<button class="btn" data-act="tplall">' + t('copy_all') + '</button>';
@@ -619,7 +628,7 @@
       f('paymentDays', t('pay_days_def'), ' type="number" min="0" inputmode="numeric"') +
       f('offerDays', t('offer_days_def'), ' type="number" min="0" inputmode="numeric"') + '</div>' +
       field(t('my_branch'), '<select data-c="branche">' + window.VORLAGEN.map(function (v) {
-        return '<option value="' + v.id + '"' + (c.branche === v.id ? ' selected' : '') + '>' + v.icon + ' ' + esc(v.name[uiLang()]) + '</option>';
+        return '<option value="' + v.id + '"' + (c.branche === v.id ? ' selected' : '') + '>' + v.icon + ' ' + esc(branchName(v)) + '</option>';
       }).join('') + '</select>', t('my_branch_hint')) + '</section>' +
       '<section class="box"><h2>' + t('backup') + '</h2><p class="muted small">' + t('backup_info') + '</p>' +
       '<div class="row2"><button class="btn" data-act="export">' + t('download') + '</button><label class="btn file">' + t('upload') + '<input type="file" accept="application/json,.json" id="import" hidden></label></div>' +
