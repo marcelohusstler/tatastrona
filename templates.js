@@ -1,216 +1,183 @@
-// Szablony branżowe (Vorlagen). Ceny to przykładowe ceny netto – użytkownik je zmienia.
-// type: "arbeit" (robocizna – liczy się do §35a EStG), "material", "sonstiges"
-// Żeby dodać nową branżę, dopisz kolejny obiekt do tej listy.
+// Szablony branżowe (Vorlagen) w 3 językach. Ceny to PRZYKŁADOWE ceny netto – użytkownik ustawia własne.
+// Format pozycji: [niemiecki, polski, angielski, jednostka, cena netto, rodzaj]
+// rodzaj: "arbeit" (robocizna – §35a EStG), "material", "sonstiges"
+// Żeby dodać nową branżę, dopisz kolejny obiekt do listy.
 window.VORLAGEN = [
-  {
-    id: "maler", pl: "Malarz", de: "Maler & Lackierer", items: [
-      { name: "Abdecken und Abkleben von Böden, Fenstern und Türen", unit: "pauschal", price: 90, type: "arbeit" },
-      { name: "Wandanstrich Dispersion weiß, 2-fach", unit: "m²", price: 8.5, type: "arbeit" },
-      { name: "Deckenanstrich Dispersion weiß, 2-fach", unit: "m²", price: 9.5, type: "arbeit" },
-      { name: "Tapezieren mit Raufaser inkl. Kleister", unit: "m²", price: 12, type: "arbeit" },
-      { name: "Alte Tapeten entfernen", unit: "m²", price: 6, type: "arbeit" },
-      { name: "Spachtelarbeiten Qualitätsstufe Q3", unit: "m²", price: 14, type: "arbeit" },
-      { name: "Innentür lackieren inkl. Zarge", unit: "Stk", price: 95, type: "arbeit" },
-      { name: "Heizkörper lackieren", unit: "Stk", price: 65, type: "arbeit" },
-      { name: "Fassadenanstrich Silikonharzfarbe", unit: "m²", price: 22, type: "arbeit" },
-      { name: "Arbeitsstunde Maler", unit: "Std", price: 48, type: "arbeit" },
-      { name: "Farbe und Verbrauchsmaterial", unit: "pauschal", price: 120, type: "material" },
-      { name: "Anfahrt", unit: "pauschal", price: 35, type: "sonstiges" }
-    ]
-  },
-  {
-    id: "elektriker", pl: "Elektryk", de: "Elektriker", items: [
-      { name: "Steckdose setzen inkl. Unterputzdose", unit: "Stk", price: 45, type: "arbeit" },
-      { name: "Lichtschalter setzen", unit: "Stk", price: 40, type: "arbeit" },
-      { name: "Leuchte montieren und anschließen", unit: "Stk", price: 55, type: "arbeit" },
-      { name: "Leitung NYM-J 3x1,5 verlegen", unit: "m", price: 9, type: "arbeit" },
-      { name: "Schlitze stemmen und verputzen", unit: "m", price: 18, type: "arbeit" },
-      { name: "Unterverteilung erneuern", unit: "pauschal", price: 950, type: "arbeit" },
-      { name: "FI-Schutzschalter einbauen", unit: "Stk", price: 120, type: "arbeit" },
-      { name: "E-Check / Prüfung nach DGUV V3", unit: "pauschal", price: 180, type: "arbeit" },
-      { name: "Arbeitsstunde Elektriker", unit: "Std", price: 58, type: "arbeit" },
-      { name: "Installationsmaterial", unit: "pauschal", price: 80, type: "material" },
-      { name: "Anfahrt", unit: "pauschal", price: 35, type: "sonstiges" }
-    ]
-  },
-  {
-    id: "sanitaer", pl: "Hydraulik / ogrzewanie", de: "Sanitär & Heizung", items: [
-      { name: "WC demontieren und entsorgen", unit: "Stk", price: 80, type: "arbeit" },
-      { name: "Wand-WC montieren inkl. Vorwandelement", unit: "Stk", price: 420, type: "arbeit" },
-      { name: "Waschtisch montieren inkl. Armatur", unit: "Stk", price: 220, type: "arbeit" },
-      { name: "Duschtasse / Duschrinne einbauen", unit: "Stk", price: 390, type: "arbeit" },
-      { name: "Armatur austauschen", unit: "Stk", price: 85, type: "arbeit" },
-      { name: "Heizkörper tauschen", unit: "Stk", price: 260, type: "arbeit" },
-      { name: "Heizungswartung", unit: "pauschal", price: 160, type: "arbeit" },
-      { name: "Rohrleitung verlegen", unit: "m", price: 35, type: "arbeit" },
-      { name: "Arbeitsstunde Installateur", unit: "Std", price: 60, type: "arbeit" },
-      { name: "Material Sanitär", unit: "pauschal", price: 150, type: "material" },
-      { name: "Anfahrt", unit: "pauschal", price: 40, type: "sonstiges" }
-    ]
-  },
-  {
-    id: "fliesen", pl: "Glazurnik", de: "Fliesenleger", items: [
-      { name: "Alte Fliesen abschlagen und entsorgen", unit: "m²", price: 22, type: "arbeit" },
-      { name: "Untergrund grundieren", unit: "m²", price: 4, type: "arbeit" },
-      { name: "Abdichtung Nassbereich", unit: "m²", price: 28, type: "arbeit" },
-      { name: "Wandfliesen verlegen bis 30x60", unit: "m²", price: 55, type: "arbeit" },
-      { name: "Bodenfliesen verlegen bis 60x60", unit: "m²", price: 58, type: "arbeit" },
-      { name: "Großformat verlegen ab 60x120", unit: "m²", price: 85, type: "arbeit" },
-      { name: "Sockelleiste aus Fliesen", unit: "m", price: 14, type: "arbeit" },
-      { name: "Silikonfugen erneuern", unit: "m", price: 9, type: "arbeit" },
-      { name: "Arbeitsstunde Fliesenleger", unit: "Std", price: 50, type: "arbeit" },
-      { name: "Fliesenkleber und Fugenmaterial", unit: "pauschal", price: 140, type: "material" }
-    ]
-  },
-  {
-    id: "trockenbau", pl: "Suche zabudowy (G-K)", de: "Trockenbau", items: [
-      { name: "Ständerwand GK einfach beplankt, gedämmt", unit: "m²", price: 55, type: "arbeit" },
-      { name: "Ständerwand GK doppelt beplankt", unit: "m²", price: 68, type: "arbeit" },
-      { name: "Abgehängte Decke GK", unit: "m²", price: 52, type: "arbeit" },
-      { name: "Dachschräge dämmen und verkleiden", unit: "m²", price: 65, type: "arbeit" },
-      { name: "Türöffnung mit UA-Profil", unit: "Stk", price: 120, type: "arbeit" },
-      { name: "Verspachteln Q2", unit: "m²", price: 9, type: "arbeit" },
-      { name: "Arbeitsstunde Trockenbauer", unit: "Std", price: 48, type: "arbeit" },
-      { name: "Profile, Platten und Dämmung", unit: "pauschal", price: 300, type: "material" }
-    ]
-  },
-  {
-    id: "boden", pl: "Podłogi", de: "Bodenleger", items: [
-      { name: "Alten Bodenbelag entfernen und entsorgen", unit: "m²", price: 9, type: "arbeit" },
-      { name: "Boden ausgleichen / spachteln", unit: "m²", price: 15, type: "arbeit" },
-      { name: "Trittschalldämmung verlegen", unit: "m²", price: 4, type: "arbeit" },
-      { name: "Laminat verlegen", unit: "m²", price: 18, type: "arbeit" },
-      { name: "Vinyl / Designboden verlegen", unit: "m²", price: 22, type: "arbeit" },
-      { name: "Parkett verlegen", unit: "m²", price: 32, type: "arbeit" },
-      { name: "Sockelleisten montieren", unit: "m", price: 8, type: "arbeit" },
-      { name: "Übergangsprofil montieren", unit: "Stk", price: 25, type: "arbeit" },
-      { name: "Arbeitsstunde Bodenleger", unit: "Std", price: 46, type: "arbeit" },
-      { name: "Kleinmaterial", unit: "pauschal", price: 60, type: "material" }
-    ]
-  },
-  {
-    id: "dach", pl: "Dekarz", de: "Dachdecker", items: [
-      { name: "Gerüst stellen und abbauen", unit: "m²", price: 12, type: "sonstiges" },
-      { name: "Alte Eindeckung abnehmen und entsorgen", unit: "m²", price: 18, type: "arbeit" },
-      { name: "Dachlattung erneuern", unit: "m²", price: 16, type: "arbeit" },
-      { name: "Unterspannbahn verlegen", unit: "m²", price: 9, type: "arbeit" },
-      { name: "Dachziegel eindecken", unit: "m²", price: 45, type: "arbeit" },
-      { name: "Dachrinne erneuern", unit: "m", price: 48, type: "arbeit" },
-      { name: "Dachreparatur / Ziegel tauschen", unit: "Std", price: 55, type: "arbeit" },
-      { name: "Dachfenster einbauen", unit: "Stk", price: 650, type: "arbeit" },
-      { name: "Material Dach", unit: "pauschal", price: 400, type: "material" }
-    ]
-  },
-  {
-    id: "tischler", pl: "Stolarz", de: "Tischler / Schreiner", items: [
-      { name: "Innentür montieren inkl. Zarge", unit: "Stk", price: 180, type: "arbeit" },
-      { name: "Einbauschrank nach Maß", unit: "pauschal", price: 1800, type: "arbeit" },
-      { name: "Küchenmontage", unit: "lfm", price: 120, type: "arbeit" },
-      { name: "Arbeitsplatte zuschneiden und montieren", unit: "Stk", price: 160, type: "arbeit" },
-      { name: "Treppe abschleifen und versiegeln", unit: "Stk", price: 45, type: "arbeit" },
-      { name: "Möbel montieren", unit: "Std", price: 45, type: "arbeit" },
-      { name: "Arbeitsstunde Tischler", unit: "Std", price: 52, type: "arbeit" },
-      { name: "Holz und Beschläge", unit: "pauschal", price: 200, type: "material" }
-    ]
-  },
-  {
-    id: "maurer", pl: "Murarz / budowlanka", de: "Maurer & Bau", items: [
-      { name: "Mauerwerk erstellen", unit: "m²", price: 75, type: "arbeit" },
-      { name: "Wand abbrechen und entsorgen", unit: "m²", price: 55, type: "arbeit" },
-      { name: "Innenputz Kalkzement", unit: "m²", price: 28, type: "arbeit" },
-      { name: "Estrich verlegen", unit: "m²", price: 32, type: "arbeit" },
-      { name: "Betonarbeiten", unit: "m³", price: 260, type: "arbeit" },
-      { name: "Durchbruch herstellen inkl. Sturz", unit: "Stk", price: 650, type: "arbeit" },
-      { name: "Arbeitsstunde Maurer", unit: "Std", price: 50, type: "arbeit" },
-      { name: "Baumaterial", unit: "pauschal", price: 300, type: "material" },
-      { name: "Container / Entsorgung", unit: "pauschal", price: 450, type: "sonstiges" }
-    ]
-  },
-  {
-    id: "garten", pl: "Ogrodnik", de: "Garten- & Landschaftsbau", items: [
-      { name: "Rasen mähen inkl. Entsorgung Schnittgut", unit: "m²", price: 0.4, type: "arbeit" },
-      { name: "Hecke schneiden", unit: "m", price: 6, type: "arbeit" },
-      { name: "Baum fällen", unit: "Stk", price: 350, type: "arbeit" },
-      { name: "Pflasterarbeiten inkl. Unterbau", unit: "m²", price: 65, type: "arbeit" },
-      { name: "Rollrasen verlegen", unit: "m²", price: 12, type: "arbeit" },
-      { name: "Zaun setzen", unit: "m", price: 55, type: "arbeit" },
-      { name: "Gartenpflege allgemein", unit: "Std", price: 42, type: "arbeit" },
-      { name: "Grünschnitt entsorgen", unit: "m³", price: 45, type: "sonstiges" },
-      { name: "Pflanzen und Material", unit: "pauschal", price: 150, type: "material" }
-    ]
-  },
-  {
-    id: "reinigung", pl: "Sprzątanie", de: "Gebäudereinigung", items: [
-      { name: "Unterhaltsreinigung Büro", unit: "m²", price: 1.8, type: "arbeit" },
-      { name: "Treppenhausreinigung", unit: "pauschal", price: 60, type: "arbeit" },
-      { name: "Fensterreinigung inkl. Rahmen", unit: "m²", price: 3.5, type: "arbeit" },
-      { name: "Bauendreinigung", unit: "m²", price: 4, type: "arbeit" },
-      { name: "Grundreinigung Wohnung", unit: "m²", price: 3.5, type: "arbeit" },
-      { name: "Teppichreinigung", unit: "m²", price: 5, type: "arbeit" },
-      { name: "Arbeitsstunde Reinigung", unit: "Std", price: 32, type: "arbeit" },
-      { name: "Reinigungsmittel", unit: "pauschal", price: 25, type: "material" }
-    ]
-  },
-  {
-    id: "hausmeister", pl: "Dozorca / Hausmeister", de: "Hausmeisterservice", items: [
-      { name: "Hausmeisterservice monatlich", unit: "pauschal", price: 250, type: "arbeit" },
-      { name: "Winterdienst pro Einsatz", unit: "pauschal", price: 45, type: "arbeit" },
-      { name: "Kleinreparaturen", unit: "Std", price: 40, type: "arbeit" },
-      { name: "Mülltonnendienst monatlich", unit: "pauschal", price: 40, type: "arbeit" },
-      { name: "Außenanlagenpflege", unit: "Std", price: 38, type: "arbeit" },
-      { name: "Material", unit: "pauschal", price: 30, type: "material" }
-    ]
-  },
-  {
-    id: "umzug", pl: "Przeprowadzki / transport", de: "Umzug & Transport", items: [
-      { name: "Umzugshelfer", unit: "Std", price: 35, type: "arbeit" },
-      { name: "Transporter 3,5 t inkl. Fahrer", unit: "Std", price: 65, type: "sonstiges" },
-      { name: "Möbel demontieren und montieren", unit: "Std", price: 42, type: "arbeit" },
-      { name: "Küche ab- und aufbauen", unit: "pauschal", price: 450, type: "arbeit" },
-      { name: "Halteverbotszone einrichten", unit: "pauschal", price: 120, type: "sonstiges" },
-      { name: "Fahrtkosten", unit: "km", price: 1.2, type: "sonstiges" },
-      { name: "Umzugskartons", unit: "Stk", price: 2.5, type: "material" }
-    ]
-  },
-  {
-    id: "entruempelung", pl: "Opróżnianie mieszkań", de: "Entrümpelung & Abriss", items: [
-      { name: "Entrümpelung Wohnung", unit: "m³", price: 55, type: "arbeit" },
-      { name: "Kellerräumung", unit: "pauschal", price: 350, type: "arbeit" },
-      { name: "Demontage Einbauküche", unit: "pauschal", price: 250, type: "arbeit" },
-      { name: "Abrissarbeiten innen", unit: "Std", price: 45, type: "arbeit" },
-      { name: "Entsorgungskosten Sperrmüll", unit: "m³", price: 40, type: "sonstiges" },
-      { name: "Besenreine Übergabe", unit: "pauschal", price: 120, type: "arbeit" }
-    ]
-  },
-  {
-    id: "fenster", pl: "Okna i drzwi", de: "Fenster- & Türmontage", items: [
-      { name: "Altes Fenster ausbauen und entsorgen", unit: "Stk", price: 60, type: "arbeit" },
-      { name: "Fenster einbauen inkl. Abdichtung (RAL)", unit: "Stk", price: 220, type: "arbeit" },
-      { name: "Haustür einbauen", unit: "Stk", price: 450, type: "arbeit" },
-      { name: "Fensterbank innen montieren", unit: "Stk", price: 45, type: "arbeit" },
-      { name: "Rollladen montieren", unit: "Stk", price: 120, type: "arbeit" },
-      { name: "Fenster einstellen / warten", unit: "Stk", price: 25, type: "arbeit" },
-      { name: "Montagematerial", unit: "pauschal", price: 80, type: "material" }
-    ]
-  },
-  {
-    id: "kfz", pl: "Mechanik samochodowy", de: "Kfz-Werkstatt", items: [
-      { name: "Inspektion", unit: "pauschal", price: 180, type: "arbeit" },
-      { name: "Ölwechsel inkl. Filter", unit: "pauschal", price: 95, type: "arbeit" },
-      { name: "Bremsbeläge vorne wechseln", unit: "pauschal", price: 140, type: "arbeit" },
-      { name: "Reifenwechsel", unit: "pauschal", price: 40, type: "arbeit" },
-      { name: "Fehlerspeicher auslesen", unit: "pauschal", price: 35, type: "arbeit" },
-      { name: "Arbeitsstunde Mechaniker", unit: "Std", price: 75, type: "arbeit" },
-      { name: "Ersatzteile", unit: "pauschal", price: 100, type: "material" }
-    ]
-  },
-  {
-    id: "dienstleistung", pl: "Usługi / freelancer", de: "Dienstleistung allgemein", items: [
-      { name: "Beratung", unit: "Std", price: 70, type: "sonstiges" },
-      { name: "Projektpauschale", unit: "pauschal", price: 500, type: "sonstiges" },
-      { name: "Tagessatz", unit: "Tag", price: 480, type: "sonstiges" },
-      { name: "Fahrtkosten", unit: "km", price: 0.3, type: "sonstiges" },
-      { name: "Material / Auslagen", unit: "pauschal", price: 50, type: "material" }
-    ]
-  }
+  { id: 'maler', name: { pl: 'Malarz', de: 'Maler & Lackierer', en: 'Painter & decorator' }, icon: '🎨', items: [
+    ['Abdecken und Abkleben von Böden, Fenstern und Türen', 'Zabezpieczenie i oklejenie podłóg, okien i drzwi', 'Covering and masking floors, windows and doors', 'pauschal', 90, 'arbeit'],
+    ['Wandanstrich Dispersion weiß, 2-fach', 'Malowanie ścian farbą dyspersyjną białą, 2 warstwy', 'Wall painting, white emulsion, 2 coats', 'm²', 8.5, 'arbeit'],
+    ['Deckenanstrich Dispersion weiß, 2-fach', 'Malowanie sufitu farbą dyspersyjną białą, 2 warstwy', 'Ceiling painting, white emulsion, 2 coats', 'm²', 9.5, 'arbeit'],
+    ['Tapezieren mit Raufaser inkl. Kleister', 'Tapetowanie tapetą Raufaser z klejem', 'Wallpapering with woodchip paper incl. paste', 'm²', 12, 'arbeit'],
+    ['Alte Tapeten entfernen', 'Usunięcie starych tapet', 'Removing old wallpaper', 'm²', 6, 'arbeit'],
+    ['Spachtelarbeiten Qualitätsstufe Q3', 'Szpachlowanie, standard Q3', 'Filling and skimming, quality level Q3', 'm²', 14, 'arbeit'],
+    ['Innentür lackieren inkl. Zarge', 'Lakierowanie drzwi wewnętrznych z ościeżnicą', 'Painting interior door incl. frame', 'Stk', 95, 'arbeit'],
+    ['Heizkörper lackieren', 'Lakierowanie grzejnika', 'Painting radiator', 'Stk', 65, 'arbeit'],
+    ['Fassadenanstrich Silikonharzfarbe', 'Malowanie elewacji farbą silikonową', 'Facade painting, silicone resin paint', 'm²', 22, 'arbeit'],
+    ['Arbeitsstunde Maler', 'Roboczogodzina malarza', 'Painter labour hour', 'Std', 48, 'arbeit'],
+    ['Farbe und Verbrauchsmaterial', 'Farba i materiały eksploatacyjne', 'Paint and consumables', 'pauschal', 120, 'material'],
+    ['Anfahrt', 'Dojazd', 'Travel costs', 'pauschal', 35, 'sonstiges']
+  ] },
+  { id: 'elektriker', name: { pl: 'Elektryk', de: 'Elektriker', en: 'Electrician' }, icon: '⚡', items: [
+    ['Steckdose setzen inkl. Unterputzdose', 'Montaż gniazdka z puszką podtynkową', 'Installing socket incl. flush box', 'Stk', 45, 'arbeit'],
+    ['Lichtschalter setzen', 'Montaż włącznika światła', 'Installing light switch', 'Stk', 40, 'arbeit'],
+    ['Leuchte montieren und anschließen', 'Montaż i podłączenie lampy', 'Mounting and connecting light fitting', 'Stk', 55, 'arbeit'],
+    ['Leitung NYM-J 3x1,5 verlegen', 'Ułożenie przewodu NYM-J 3x1,5', 'Laying cable NYM-J 3x1.5', 'm', 9, 'arbeit'],
+    ['Schlitze stemmen und verputzen', 'Wykucie i zatynkowanie bruzd', 'Cutting and plastering wall chases', 'm', 18, 'arbeit'],
+    ['Unterverteilung erneuern', 'Wymiana rozdzielnicy', 'Replacing distribution board', 'pauschal', 950, 'arbeit'],
+    ['FI-Schutzschalter einbauen', 'Montaż wyłącznika różnicowoprądowego', 'Installing RCD', 'Stk', 120, 'arbeit'],
+    ['E-Check / Prüfung nach DGUV V3', 'Przegląd instalacji (DGUV V3)', 'Electrical inspection (DGUV V3)', 'pauschal', 180, 'arbeit'],
+    ['Arbeitsstunde Elektriker', 'Roboczogodzina elektryka', 'Electrician labour hour', 'Std', 58, 'arbeit'],
+    ['Installationsmaterial', 'Materiał instalacyjny', 'Installation material', 'pauschal', 80, 'material'],
+    ['Anfahrt', 'Dojazd', 'Travel costs', 'pauschal', 35, 'sonstiges']
+  ] },
+  { id: 'sanitaer', name: { pl: 'Hydraulik / ogrzewanie', de: 'Sanitär & Heizung', en: 'Plumbing & heating' }, icon: '🚿', items: [
+    ['WC demontieren und entsorgen', 'Demontaż i utylizacja WC', 'Removing and disposing of toilet', 'Stk', 80, 'arbeit'],
+    ['Wand-WC montieren inkl. Vorwandelement', 'Montaż WC podwieszanego ze stelażem', 'Installing wall-hung toilet incl. frame', 'Stk', 420, 'arbeit'],
+    ['Waschtisch montieren inkl. Armatur', 'Montaż umywalki z baterią', 'Installing washbasin incl. tap', 'Stk', 220, 'arbeit'],
+    ['Duschtasse / Duschrinne einbauen', 'Montaż brodzika / odpływu liniowego', 'Installing shower tray / drain', 'Stk', 390, 'arbeit'],
+    ['Armatur austauschen', 'Wymiana baterii', 'Replacing tap', 'Stk', 85, 'arbeit'],
+    ['Heizkörper tauschen', 'Wymiana grzejnika', 'Replacing radiator', 'Stk', 260, 'arbeit'],
+    ['Heizungswartung', 'Serwis ogrzewania', 'Heating maintenance', 'pauschal', 160, 'arbeit'],
+    ['Rohrleitung verlegen', 'Ułożenie rur', 'Laying pipework', 'm', 35, 'arbeit'],
+    ['Arbeitsstunde Installateur', 'Roboczogodzina hydraulika', 'Plumber labour hour', 'Std', 60, 'arbeit'],
+    ['Material Sanitär', 'Materiał hydrauliczny', 'Plumbing material', 'pauschal', 150, 'material'],
+    ['Anfahrt', 'Dojazd', 'Travel costs', 'pauschal', 40, 'sonstiges']
+  ] },
+  { id: 'fliesen', name: { pl: 'Glazurnik', de: 'Fliesenleger', en: 'Tiler' }, icon: '🧱', items: [
+    ['Alte Fliesen abschlagen und entsorgen', 'Skucie i utylizacja starych płytek', 'Removing and disposing of old tiles', 'm²', 22, 'arbeit'],
+    ['Untergrund grundieren', 'Gruntowanie podłoża', 'Priming substrate', 'm²', 4, 'arbeit'],
+    ['Abdichtung Nassbereich', 'Hydroizolacja strefy mokrej', 'Waterproofing wet area', 'm²', 28, 'arbeit'],
+    ['Wandfliesen verlegen bis 30x60', 'Układanie płytek ściennych do 30x60', 'Laying wall tiles up to 30x60', 'm²', 55, 'arbeit'],
+    ['Bodenfliesen verlegen bis 60x60', 'Układanie płytek podłogowych do 60x60', 'Laying floor tiles up to 60x60', 'm²', 58, 'arbeit'],
+    ['Großformat verlegen ab 60x120', 'Układanie wielkiego formatu od 60x120', 'Laying large-format tiles from 60x120', 'm²', 85, 'arbeit'],
+    ['Sockelleiste aus Fliesen', 'Cokół z płytek', 'Tile skirting', 'm', 14, 'arbeit'],
+    ['Silikonfugen erneuern', 'Wymiana fug silikonowych', 'Renewing silicone joints', 'm', 9, 'arbeit'],
+    ['Arbeitsstunde Fliesenleger', 'Roboczogodzina glazurnika', 'Tiler labour hour', 'Std', 50, 'arbeit'],
+    ['Fliesenkleber und Fugenmaterial', 'Klej do płytek i fuga', 'Tile adhesive and grout', 'pauschal', 140, 'material']
+  ] },
+  { id: 'trockenbau', name: { pl: 'Suche zabudowy (G-K)', de: 'Trockenbau', en: 'Drywall' }, icon: '📐', items: [
+    ['Ständerwand GK einfach beplankt, gedämmt', 'Ścianka G-K pojedynczo opłytowana, z izolacją', 'Stud wall, single plasterboard, insulated', 'm²', 55, 'arbeit'],
+    ['Ständerwand GK doppelt beplankt', 'Ścianka G-K podwójnie opłytowana', 'Stud wall, double plasterboard', 'm²', 68, 'arbeit'],
+    ['Abgehängte Decke GK', 'Sufit podwieszany G-K', 'Suspended plasterboard ceiling', 'm²', 52, 'arbeit'],
+    ['Dachschräge dämmen und verkleiden', 'Ocieplenie i zabudowa skosów', 'Insulating and lining sloped ceiling', 'm²', 65, 'arbeit'],
+    ['Türöffnung mit UA-Profil', 'Otwór drzwiowy z profilem UA', 'Door opening with UA profile', 'Stk', 120, 'arbeit'],
+    ['Verspachteln Q2', 'Szpachlowanie Q2', 'Jointing and filling Q2', 'm²', 9, 'arbeit'],
+    ['Arbeitsstunde Trockenbauer', 'Roboczogodzina (suche zabudowy)', 'Drywall labour hour', 'Std', 48, 'arbeit'],
+    ['Profile, Platten und Dämmung', 'Profile, płyty i izolacja', 'Profiles, boards and insulation', 'pauschal', 300, 'material']
+  ] },
+  { id: 'boden', name: { pl: 'Podłogi', de: 'Bodenleger', en: 'Flooring' }, icon: '🪵', items: [
+    ['Alten Bodenbelag entfernen und entsorgen', 'Usunięcie i utylizacja starej podłogi', 'Removing and disposing of old flooring', 'm²', 9, 'arbeit'],
+    ['Boden ausgleichen / spachteln', 'Wyrównanie / szpachlowanie podłoża', 'Levelling floor', 'm²', 15, 'arbeit'],
+    ['Trittschalldämmung verlegen', 'Ułożenie podkładu wyciszającego', 'Laying impact sound insulation', 'm²', 4, 'arbeit'],
+    ['Laminat verlegen', 'Układanie paneli laminowanych', 'Laying laminate', 'm²', 18, 'arbeit'],
+    ['Vinyl / Designboden verlegen', 'Układanie paneli winylowych', 'Laying vinyl flooring', 'm²', 22, 'arbeit'],
+    ['Parkett verlegen', 'Układanie parkietu', 'Laying parquet', 'm²', 32, 'arbeit'],
+    ['Sockelleisten montieren', 'Montaż listew przypodłogowych', 'Fitting skirting boards', 'm', 8, 'arbeit'],
+    ['Übergangsprofil montieren', 'Montaż listwy progowej', 'Fitting transition strip', 'Stk', 25, 'arbeit'],
+    ['Arbeitsstunde Bodenleger', 'Roboczogodzina (podłogi)', 'Floor fitter labour hour', 'Std', 46, 'arbeit'],
+    ['Kleinmaterial', 'Drobne materiały', 'Small materials', 'pauschal', 60, 'material']
+  ] },
+  { id: 'dach', name: { pl: 'Dekarz', de: 'Dachdecker', en: 'Roofer' }, icon: '🏠', items: [
+    ['Gerüst stellen und abbauen', 'Postawienie i demontaż rusztowania', 'Erecting and dismantling scaffolding', 'm²', 12, 'sonstiges'],
+    ['Alte Eindeckung abnehmen und entsorgen', 'Zdjęcie i utylizacja starego pokrycia', 'Removing and disposing of old roofing', 'm²', 18, 'arbeit'],
+    ['Dachlattung erneuern', 'Wymiana łat dachowych', 'Renewing roof battens', 'm²', 16, 'arbeit'],
+    ['Unterspannbahn verlegen', 'Ułożenie membrany dachowej', 'Laying roofing membrane', 'm²', 9, 'arbeit'],
+    ['Dachziegel eindecken', 'Krycie dachówką', 'Laying roof tiles', 'm²', 45, 'arbeit'],
+    ['Dachrinne erneuern', 'Wymiana rynny', 'Replacing gutter', 'm', 48, 'arbeit'],
+    ['Dachreparatur / Ziegel tauschen', 'Naprawa dachu / wymiana dachówek', 'Roof repair / replacing tiles', 'Std', 55, 'arbeit'],
+    ['Dachfenster einbauen', 'Montaż okna dachowego', 'Installing roof window', 'Stk', 650, 'arbeit'],
+    ['Material Dach', 'Materiał dachowy', 'Roofing material', 'pauschal', 400, 'material']
+  ] },
+  { id: 'tischler', name: { pl: 'Stolarz', de: 'Tischler / Schreiner', en: 'Carpenter / joiner' }, icon: '🪚', items: [
+    ['Innentür montieren inkl. Zarge', 'Montaż drzwi wewnętrznych z ościeżnicą', 'Fitting interior door incl. frame', 'Stk', 180, 'arbeit'],
+    ['Einbauschrank nach Maß', 'Szafa wnękowa na wymiar', 'Built-in wardrobe made to measure', 'pauschal', 1800, 'arbeit'],
+    ['Küchenmontage', 'Montaż kuchni', 'Kitchen installation', 'lfm', 120, 'arbeit'],
+    ['Arbeitsplatte zuschneiden und montieren', 'Docięcie i montaż blatu', 'Cutting and fitting worktop', 'Stk', 160, 'arbeit'],
+    ['Treppe abschleifen und versiegeln', 'Cyklinowanie i lakierowanie schodów', 'Sanding and sealing stairs', 'Stk', 45, 'arbeit'],
+    ['Möbel montieren', 'Montaż mebli', 'Furniture assembly', 'Std', 45, 'arbeit'],
+    ['Arbeitsstunde Tischler', 'Roboczogodzina stolarza', 'Carpenter labour hour', 'Std', 52, 'arbeit'],
+    ['Holz und Beschläge', 'Drewno i okucia', 'Wood and fittings', 'pauschal', 200, 'material']
+  ] },
+  { id: 'maurer', name: { pl: 'Murarz / budowlanka', de: 'Maurer & Bau', en: 'Bricklayer & construction' }, icon: '🏗️', items: [
+    ['Mauerwerk erstellen', 'Murowanie ścian', 'Bricklaying', 'm²', 75, 'arbeit'],
+    ['Wand abbrechen und entsorgen', 'Wyburzenie ściany z utylizacją', 'Demolishing wall incl. disposal', 'm²', 55, 'arbeit'],
+    ['Innenputz Kalkzement', 'Tynk wewnętrzny cementowo-wapienny', 'Interior lime-cement plaster', 'm²', 28, 'arbeit'],
+    ['Estrich verlegen', 'Wylewka jastrychu', 'Laying screed', 'm²', 32, 'arbeit'],
+    ['Betonarbeiten', 'Prace betonowe', 'Concrete work', 'm³', 260, 'arbeit'],
+    ['Durchbruch herstellen inkl. Sturz', 'Wykucie otworu z nadprożem', 'Making opening incl. lintel', 'Stk', 650, 'arbeit'],
+    ['Arbeitsstunde Maurer', 'Roboczogodzina murarza', 'Bricklayer labour hour', 'Std', 50, 'arbeit'],
+    ['Baumaterial', 'Materiał budowlany', 'Building material', 'pauschal', 300, 'material'],
+    ['Container / Entsorgung', 'Kontener / utylizacja', 'Skip / disposal', 'pauschal', 450, 'sonstiges']
+  ] },
+  { id: 'garten', name: { pl: 'Ogrodnik', de: 'Garten- & Landschaftsbau', en: 'Gardening & landscaping' }, icon: '🌳', items: [
+    ['Rasen mähen inkl. Entsorgung Schnittgut', 'Koszenie trawnika z wywozem trawy', 'Lawn mowing incl. disposal of clippings', 'm²', 0.4, 'arbeit'],
+    ['Hecke schneiden', 'Przycinanie żywopłotu', 'Hedge trimming', 'm', 6, 'arbeit'],
+    ['Baum fällen', 'Wycinka drzewa', 'Tree felling', 'Stk', 350, 'arbeit'],
+    ['Pflasterarbeiten inkl. Unterbau', 'Układanie kostki z podbudową', 'Paving incl. sub-base', 'm²', 65, 'arbeit'],
+    ['Rollrasen verlegen', 'Układanie trawy z rolki', 'Laying turf', 'm²', 12, 'arbeit'],
+    ['Zaun setzen', 'Stawianie ogrodzenia', 'Fence installation', 'm', 55, 'arbeit'],
+    ['Gartenpflege allgemein', 'Pielęgnacja ogrodu', 'General garden maintenance', 'Std', 42, 'arbeit'],
+    ['Grünschnitt entsorgen', 'Wywóz odpadów zielonych', 'Green waste disposal', 'm³', 45, 'sonstiges'],
+    ['Pflanzen und Material', 'Rośliny i materiał', 'Plants and material', 'pauschal', 150, 'material']
+  ] },
+  { id: 'reinigung', name: { pl: 'Sprzątanie', de: 'Gebäudereinigung', en: 'Cleaning' }, icon: '🧽', items: [
+    ['Unterhaltsreinigung Büro', 'Sprzątanie biura (regularne)', 'Regular office cleaning', 'm²', 1.8, 'arbeit'],
+    ['Treppenhausreinigung', 'Sprzątanie klatki schodowej', 'Stairwell cleaning', 'pauschal', 60, 'arbeit'],
+    ['Fensterreinigung inkl. Rahmen', 'Mycie okien z ramami', 'Window cleaning incl. frames', 'm²', 3.5, 'arbeit'],
+    ['Bauendreinigung', 'Sprzątanie po remoncie', 'Post-construction cleaning', 'm²', 4, 'arbeit'],
+    ['Grundreinigung Wohnung', 'Gruntowne sprzątanie mieszkania', 'Deep cleaning of apartment', 'm²', 3.5, 'arbeit'],
+    ['Teppichreinigung', 'Czyszczenie wykładzin', 'Carpet cleaning', 'm²', 5, 'arbeit'],
+    ['Arbeitsstunde Reinigung', 'Roboczogodzina sprzątania', 'Cleaning labour hour', 'Std', 32, 'arbeit'],
+    ['Reinigungsmittel', 'Środki czystości', 'Cleaning agents', 'pauschal', 25, 'material']
+  ] },
+  { id: 'hausmeister', name: { pl: 'Dozorca / Hausmeister', de: 'Hausmeisterservice', en: 'Caretaker service' }, icon: '🔧', items: [
+    ['Hausmeisterservice monatlich', 'Obsługa dozorcy – miesięcznie', 'Caretaker service, monthly', 'pauschal', 250, 'arbeit'],
+    ['Winterdienst pro Einsatz', 'Odśnieżanie – za wyjazd', 'Winter service per call-out', 'pauschal', 45, 'arbeit'],
+    ['Kleinreparaturen', 'Drobne naprawy', 'Minor repairs', 'Std', 40, 'arbeit'],
+    ['Mülltonnendienst monatlich', 'Obsługa kubłów na śmieci – miesięcznie', 'Bin service, monthly', 'pauschal', 40, 'arbeit'],
+    ['Außenanlagenpflege', 'Pielęgnacja terenu zewnętrznego', 'Outdoor area maintenance', 'Std', 38, 'arbeit'],
+    ['Material', 'Materiał', 'Material', 'pauschal', 30, 'material']
+  ] },
+  { id: 'umzug', name: { pl: 'Przeprowadzki / transport', de: 'Umzug & Transport', en: 'Removals & transport' }, icon: '🚚', items: [
+    ['Umzugshelfer', 'Pomocnik przy przeprowadzce', 'Removal helper', 'Std', 35, 'arbeit'],
+    ['Transporter 3,5 t inkl. Fahrer', 'Bus 3,5 t z kierowcą', 'Van 3.5 t incl. driver', 'Std', 65, 'sonstiges'],
+    ['Möbel demontieren und montieren', 'Demontaż i montaż mebli', 'Furniture dismantling and assembly', 'Std', 42, 'arbeit'],
+    ['Küche ab- und aufbauen', 'Demontaż i montaż kuchni', 'Kitchen removal and reinstallation', 'pauschal', 450, 'arbeit'],
+    ['Halteverbotszone einrichten', 'Strefa zakazu parkowania', 'Temporary no-parking zone', 'pauschal', 120, 'sonstiges'],
+    ['Fahrtkosten', 'Koszty przejazdu', 'Mileage', 'km', 1.2, 'sonstiges'],
+    ['Umzugskartons', 'Kartony do przeprowadzki', 'Moving boxes', 'Stk', 2.5, 'material']
+  ] },
+  { id: 'entruempelung', name: { pl: 'Opróżnianie mieszkań', de: 'Entrümpelung & Abriss', en: 'House clearance & demolition' }, icon: '🗑️', items: [
+    ['Entrümpelung Wohnung', 'Opróżnienie mieszkania', 'Apartment clearance', 'm³', 55, 'arbeit'],
+    ['Kellerräumung', 'Opróżnienie piwnicy', 'Basement clearance', 'pauschal', 350, 'arbeit'],
+    ['Demontage Einbauküche', 'Demontaż zabudowy kuchennej', 'Removing fitted kitchen', 'pauschal', 250, 'arbeit'],
+    ['Abrissarbeiten innen', 'Prace rozbiórkowe wewnątrz', 'Interior demolition', 'Std', 45, 'arbeit'],
+    ['Entsorgungskosten Sperrmüll', 'Koszty utylizacji gabarytów', 'Bulky waste disposal costs', 'm³', 40, 'sonstiges'],
+    ['Besenreine Übergabe', 'Przekazanie w stanie wysprzątanym', 'Broom-clean handover', 'pauschal', 120, 'arbeit']
+  ] },
+  { id: 'fenster', name: { pl: 'Okna i drzwi', de: 'Fenster- & Türmontage', en: 'Windows & doors' }, icon: '🪟', items: [
+    ['Altes Fenster ausbauen und entsorgen', 'Demontaż i utylizacja starego okna', 'Removing and disposing of old window', 'Stk', 60, 'arbeit'],
+    ['Fenster einbauen inkl. Abdichtung (RAL)', 'Montaż okna z uszczelnieniem (RAL)', 'Installing window incl. sealing (RAL)', 'Stk', 220, 'arbeit'],
+    ['Haustür einbauen', 'Montaż drzwi wejściowych', 'Installing front door', 'Stk', 450, 'arbeit'],
+    ['Fensterbank innen montieren', 'Montaż parapetu wewnętrznego', 'Fitting interior window sill', 'Stk', 45, 'arbeit'],
+    ['Rollladen montieren', 'Montaż rolety', 'Installing roller shutter', 'Stk', 120, 'arbeit'],
+    ['Fenster einstellen / warten', 'Regulacja / serwis okna', 'Adjusting / servicing window', 'Stk', 25, 'arbeit'],
+    ['Montagematerial', 'Materiał montażowy', 'Fitting material', 'pauschal', 80, 'material']
+  ] },
+  { id: 'kfz', name: { pl: 'Mechanik samochodowy', de: 'Kfz-Werkstatt', en: 'Car workshop' }, icon: '🚗', items: [
+    ['Inspektion', 'Przegląd', 'Service inspection', 'pauschal', 180, 'arbeit'],
+    ['Ölwechsel inkl. Filter', 'Wymiana oleju z filtrem', 'Oil change incl. filter', 'pauschal', 95, 'arbeit'],
+    ['Bremsbeläge vorne wechseln', 'Wymiana przednich klocków hamulcowych', 'Replacing front brake pads', 'pauschal', 140, 'arbeit'],
+    ['Reifenwechsel', 'Wymiana opon', 'Tyre change', 'pauschal', 40, 'arbeit'],
+    ['Fehlerspeicher auslesen', 'Odczyt błędów', 'Reading fault memory', 'pauschal', 35, 'arbeit'],
+    ['Arbeitsstunde Mechaniker', 'Roboczogodzina mechanika', 'Mechanic labour hour', 'Std', 75, 'arbeit'],
+    ['Ersatzteile', 'Części zamienne', 'Spare parts', 'pauschal', 100, 'material']
+  ] },
+  { id: 'dienstleistung', name: { pl: 'Usługi / freelancer', de: 'Dienstleistung allgemein', en: 'General services' }, icon: '💼', items: [
+    ['Beratung', 'Doradztwo', 'Consulting', 'Std', 70, 'sonstiges'],
+    ['Projektpauschale', 'Ryczałt za projekt', 'Project flat fee', 'pauschal', 500, 'sonstiges'],
+    ['Tagessatz', 'Stawka dzienna', 'Day rate', 'Tag', 480, 'sonstiges'],
+    ['Fahrtkosten', 'Koszty przejazdu', 'Mileage', 'km', 0.3, 'sonstiges'],
+    ['Material / Auslagen', 'Materiał / wydatki', 'Materials / expenses', 'pauschal', 50, 'material']
+  ] }
 ];
