@@ -52,7 +52,7 @@
   // ---------- Dane ----------
   function defaults() {
     return {
-      settings: { uiLang: guessLang(), docLang: 'de', onboarded: false, copied: [] },
+      settings: { uiLang: startLang(), docLang: 'de', onboarded: false, copied: [] },
       company: {
         name: '', owner: '', street: '', zip: '', city: '', phone: '', email: '', web: '',
         taxNo: '', vatId: '', bank: '', iban: '', bic: '',
@@ -61,10 +61,12 @@
       customers: [], items: [], docs: []
     };
   }
-  function guessLang() {
-    var l = (navigator.language || 'pl').slice(0, 2).toLowerCase();
-    return window.LANGS[l] ? l : 'pl';
+  // Język startowy: angielski. Link z polskiej strony (?lang=pl) otwiera aplikację po polsku.
+  function urlLang() {
+    var m = /[?&]lang=([a-z]{2})/.exec(location.search);
+    return m && window.LANGS[m[1]] ? m[1] : null;
   }
+  function startLang() { return urlLang() || 'en'; }
   var S = (function load() {
     var d = defaults();
     try {
@@ -76,6 +78,7 @@
       }
     } catch (e) { /* brak dostępu do pamięci – działamy w pamięci RAM */ }
     d.docs.forEach(function (x) { if (!x.lang) x.lang = 'de'; });
+    if (!d.settings.onboarded && urlLang()) d.settings.uiLang = urlLang();
     return d;
   })();
 
@@ -184,12 +187,15 @@
       return '<option value="' + k + '"' + (sel === k ? ' selected' : '') + '>' + L.flag + ' ' + L.name + '</option>';
     }).join('');
   }
+  function guideUrl() { return uiLang() === 'pl' ? '../pl/poradnik.html' : '../guide.html'; }
   function renderChrome() {
     document.documentElement.lang = uiLang();
     document.querySelectorAll('[data-nav]').forEach(function (a) {
       a.querySelector('.lbl').textContent = t('nav_' + a.getAttribute('data-nav'));
     });
     document.getElementById('saved').textContent = t('saved');
+    var help = document.getElementById('helplink');
+    if (help) { help.href = guideUrl(); help.title = t('guide'); }
   }
 
   // ---------- Router ----------
@@ -633,7 +639,7 @@
       '<section class="box"><h2>' + t('backup') + '</h2><p class="muted small">' + t('backup_info') + '</p>' +
       '<div class="row2"><button class="btn" data-act="export">' + t('download') + '</button><label class="btn file">' + t('upload') + '<input type="file" accept="application/json,.json" id="import" hidden></label></div>' +
       '<button class="btn danger" data-act="wipe">' + t('wipe') + '</button></section>' +
-      '<p class="legal small center"><a href="../poradnik.html">' + t('guide') + '</a> · <a href="../impressum.html">Impressum</a> · <a href="../datenschutz.html">Datenschutz</a></p>';
+      '<p class="legal small center"><a href="' + guideUrl() + '">' + t('guide') + '</a> · <a href="../impressum.html">Impressum</a> · <a href="../datenschutz.html">Datenschutz</a></p>';
   }
 
   // ---------- Zdarzenia ----------

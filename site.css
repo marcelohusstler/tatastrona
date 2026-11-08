@@ -33,7 +33,9 @@ h3 { font-size: 1.15rem; margin: 0 0 .4em; }
 .btn.ghost { background: transparent; color: var(--c2); }
 .btn.ghost:hover { background: var(--c3); }
 .btn.sm { padding: 8px 14px; font-size: .9rem; }
-@media (max-width: 760px) { .nav-links { display: none; } .nav .btn.sm { margin-left: auto; } }
+.lang-switch { font-weight: 700; font-size: .85rem; color: var(--c); text-decoration: none; border: 1.5px solid var(--line); border-radius: 8px; padding: 5px 9px; }
+.lang-switch:hover { border-color: var(--c2); color: var(--c2); }
+@media (max-width: 760px) { .nav-links { display: none; } .lang-switch { margin-left: auto; } }
 
 /* hero */
 .hero { background: linear-gradient(180deg, var(--c3) 0%, #fff 100%); padding: 56px 0 40px; overflow: hidden; }

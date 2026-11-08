@@ -1,6 +1,6 @@
 # Fakturka – Rechnungen & Angebote
 
-Strona: `index.html` (informacje), `poradnik.html` (poradnik), `impressum.html`, `datenschutz.html`. Aplikacja: folder `app/`.
+Strona (angielska, główna): `index.html`, `guide.html`. Polska wersja: `pl/index.html`, `pl/poradnik.html`. Wspólne: `impressum.html`, `datenschutz.html`, `site.css`. Aplikacja: folder `app/` – startuje po angielsku, a link `app/index.html?lang=pl` otwiera ją po polsku.
 
 Aplikacja do wystawiania faktur (Rechnungen) i ofert (Angebote) dla małych firm w Niemczech.
 Interfejs jest po polsku, a dokumenty powstają po niemiecku. Działa w przeglądarce na telefonie i komputerze i można ją dodać do ekranu głównego (PWA).
