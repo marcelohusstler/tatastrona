@@ -52,11 +52,12 @@
   // ---------- Dane ----------
   function defaults() {
     return {
-      settings: { uiLang: startLang(), docLang: 'de', onboarded: false, copied: [] },
+      settings: { uiLang: startLang(), docLang: 'de', onboarded: false, copied: [], lock: null, lockSetup: false },
       company: {
         name: '', owner: '', street: '', zip: '', city: '', phone: '', email: '', web: '',
         taxNo: '', vatId: '', bank: '', iban: '', bic: '',
-        kleinunternehmer: false, paymentDays: 14, offerDays: 30, branche: 'maler', logo: ''
+        kleinunternehmer: false, paymentDays: 14, offerDays: 30, branche: 'maler', logo: '',
+        prefixInv: 'RE', prefixOff: 'AN', startInv: 1, startOff: 1, numYear: ''
       },
       customers: [], items: [], docs: []
     };
@@ -136,8 +137,11 @@
   function isOverdue(doc) { return doc.type === 'rechnung' && doc.status === 'offen' && dueDate(doc) < today(); }
 
   function nextNumber(type, year) {
-    var prefix = type === 'rechnung' ? 'RE' : 'AN';
-    var re = new RegExp('^' + prefix + '-' + year + '-(\\d+)$'), max = 0;
+    var c = S.company, isR = type === 'rechnung';
+    var prefix = String((isR ? c.prefixInv : c.prefixOff) || (isR ? 'RE' : 'AN')).trim();
+    var start = parseInt(isR ? c.startInv : c.startOff, 10) || 1;
+    var esc = prefix.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    var re = new RegExp('^' + esc + '-' + year + '[-/](\\d+)$'), max = String(c.numYear) === String(year) ? start - 1 : 0;
     S.docs.forEach(function (d) {
       if (d.type !== type) return;
       var m = re.exec(d.number || ''); if (m) max = Math.max(max, parseInt(m[1], 10));
@@ -198,6 +202,46 @@
     if (help) { help.href = guideUrl(); help.title = t('guide'); }
   }
 
+  // ---------- Logowanie (hasło na tym urządzeniu) ----------
+  var unlocked = false;
+  try { unlocked = sessionStorage.getItem('fakturka.unlocked') === '1'; } catch (e) { /* brak sessionStorage */ }
+  function needsLogin() { return S.settings.onboarded && ((S.settings.lock && !unlocked) || (S.settings.lockSetup && !S.settings.lock)); }
+  function setUnlocked(v) {
+    unlocked = v;
+    try { if (v) sessionStorage.setItem('fakturka.unlocked', '1'); else sessionStorage.removeItem('fakturka.unlocked'); } catch (e) { /* ignoruj */ }
+  }
+  function b64(buf) { return btoa(String.fromCharCode.apply(null, new Uint8Array(buf))); }
+  function derive(pw, saltB64) {
+    var salt = Uint8Array.from(atob(saltB64), function (ch) { return ch.charCodeAt(0); });
+    return crypto.subtle.importKey('raw', new TextEncoder().encode(pw), 'PBKDF2', false, ['deriveBits'])
+      .then(function (k) { return crypto.subtle.deriveBits({ name: 'PBKDF2', salt: salt, iterations: 150000, hash: 'SHA-256' }, k, 256); })
+      .then(b64);
+  }
+  function setPassword(pw) {
+    var salt = new Uint8Array(16); crypto.getRandomValues(salt);
+    var s = b64(salt.buffer);
+    return derive(pw, s).then(function (h) { S.settings.lock = { salt: s, hash: h }; S.settings.lockSetup = false; save(); });
+  }
+  function checkPassword(pw) {
+    var L = S.settings.lock;
+    return derive(pw, L.salt).then(function (h) { return h === L.hash; });
+  }
+  function pwFields(withRepeat) {
+    return field(t('password'), '<input type="password" name="pw" autocomplete="' + (withRepeat ? 'new-password' : 'current-password') + '" required>') +
+      (withRepeat ? field(t('password2'), '<input type="password" name="pw2" autocomplete="new-password" required>') : '');
+  }
+  function renderLogin() {
+    var c = S.company, setup = !S.settings.lock;
+    var head = '<div class="login-head">' + (c.logo ? '<img src="' + c.logo + '" alt="">' : '') +
+      (c.name ? '<b>' + esc(c.name) + '</b>' : '') + '</div>';
+    view.innerHTML = '<div class="wz login">' + head + '<h1>' + t(setup ? 'setpw_t' : 'login_t') + '</h1><p>' + t(setup ? 'setpw_p' : 'login_p') + '</p>' +
+      '<form id="' + (setup ? 'setpwform' : 'loginform') + '" class="box">' + pwFields(setup) +
+      '<p class="err" id="loginerr" hidden></p><button class="btn primary big" type="submit">' + t(setup ? 'setpw_btn' : 'login_btn') + '</button></form>' +
+      (setup ? '' : '<p class="muted small">' + t('login_forgot') + '</p>') + '</div>';
+    var first = view.querySelector('input'); if (first) first.focus();
+  }
+  function showErr(msg) { var e = document.getElementById('loginerr'); if (e) { e.textContent = msg; e.hidden = false; } else toast(msg); }
+
   // ---------- Router ----------
   function route() {
     var h = location.hash.replace(/^#\/?/, '') || 'docs';
@@ -206,6 +250,10 @@
     var parts = h.split('/'), section = parts[0], id = parts[1];
     if (!S.settings.onboarded && section !== 'welcome') return go('#/welcome');
     closeModal(); renderChrome();
+    if (needsLogin()) {
+      document.body.classList.remove('is-preview'); document.body.classList.add('is-wizard');
+      view.dataset.doc = ''; renderLogin(); window.scrollTo(0, 0); return;
+    }
     document.body.classList.toggle('is-preview', section === 'preview');
     document.body.classList.toggle('is-wizard', section === 'welcome');
     document.querySelectorAll('[data-nav]').forEach(function (a) {
@@ -238,6 +286,7 @@
           var L = window.LANGS[k];
           return '<button class="wz-choice' + (uiLang() === k ? ' on' : '') + '" data-act="wz-lang" data-v="' + k + '"><span class="big">' + L.flag + '</span>' + L.name + '</button>';
         }).join('') + '</div>';
+      h += '<label class="btn big file wz-import">' + t('upload') + '<input type="file" accept="application/json,.json" id="import" hidden></label>';
     } else if (s === 'doclang') {
       h += '<h1>' + t('wz_doc_t') + '</h1><p>' + t('wz_doc_p') + '</p><div class="wz-choices two">' +
         DOC_ORDER.map(function (k) {
@@ -611,6 +660,10 @@
       (it.id ? '<button class="btn danger" type="button" data-act="delitem">' + t('delete') + '</button>' : '') + '</div></form>';
   }
 
+  function numHint() {
+    var y = today().slice(0, 4);
+    return t('num_hint', { x: nextNumber('angebot', y) + ' · ' + nextNumber('rechnung', y) });
+  }
   // ---------- Firma ----------
   function renderCompany() {
     var c = S.company;
@@ -636,6 +689,15 @@
       field(t('my_branch'), '<select data-c="branche">' + window.VORLAGEN.map(function (v) {
         return '<option value="' + v.id + '"' + (c.branche === v.id ? ' selected' : '') + '>' + v.icon + ' ' + esc(branchName(v)) + '</option>';
       }).join('') + '</select>', t('my_branch_hint')) + '</section>' +
+      '<section class="box"><h2>' + t('num_title') + '</h2><div class="grid2">' +
+      f('prefixOff', t('prefix_off')) + f('startOff', t('start_off'), ' type="number" min="1" inputmode="numeric"') +
+      f('prefixInv', t('prefix_inv')) + f('startInv', t('start_inv'), ' type="number" min="1" inputmode="numeric"') + '</div>' +
+      '<p class="muted small" id="numhint">' + numHint() + '</p></section>' +
+      '<section class="box"><h2>' + t('sec_title') + '</h2><p>' + t(S.settings.lock ? 'sec_on' : 'sec_off') + '</p>' +
+      '<form id="pwform">' + pwFields(true) + '<p class="err" id="loginerr" hidden></p>' +
+      '<button class="btn primary" type="submit">' + t(S.settings.lock ? 'pw_change' : 'setpw_btn') + '</button></form>' +
+      (S.settings.lock ? '<div class="row2"><button class="btn" data-act="logout">' + t('logout') + '</button><button class="btn danger" data-act="rmpw">' + t('pw_remove') + '</button></div>' : '') +
+      '<p class="muted small">' + t('sec_note') + '</p></section>' +
       '<section class="box"><h2>' + t('backup') + '</h2><p class="muted small">' + t('backup_info') + '</p>' +
       '<div class="row2"><button class="btn" data-act="export">' + t('download') + '</button><label class="btn file">' + t('upload') + '<input type="file" accept="application/json,.json" id="import" hidden></label></div>' +
       '<button class="btn danger" data-act="wipe">' + t('wipe') + '</button></section>' +
@@ -706,6 +768,8 @@
       // firma
       case 'dellogo': S.company.logo = ''; save(); renderCompany(); break;
       case 'export': exportData(); break;
+      case 'logout': setUnlocked(false); route(); break;
+      case 'rmpw': if (confirm(t('confirm_rm_pw'))) { S.settings.lock = null; S.settings.lockSetup = false; save(); toast(t('pw_removed')); renderCompany(); } break;
       case 'wipe':
         if (confirm(t('wipe1')) && confirm(t('wipe2'))) {
           var keepLang = S.settings.uiLang;
@@ -732,7 +796,9 @@
     }
     if (el.hasAttribute('data-c') && el.type !== 'checkbox' && el.tagName !== 'SELECT') {
       var ck = el.getAttribute('data-c');
-      S.company[ck] = (ck === 'paymentDays' || ck === 'offerDays') ? (parseInt(el.value, 10) || 0) : el.value;
+      if (ck === 'startInv' || ck === 'startOff') { S.company[ck] = parseInt(el.value, 10) || 1; S.company.numYear = today().slice(0, 4); }
+      else S.company[ck] = (ck === 'paymentDays' || ck === 'offerDays') ? (parseInt(el.value, 10) || 0) : el.value;
+      var nh = document.getElementById('numhint'); if (nh) nh.textContent = numHint();
       save();
     }
   });
@@ -773,6 +839,18 @@
     e.preventDefault();
     var form = e.target, fd = new FormData(form), o = {};
     fd.forEach(function (v, k) { o[k] = String(v).trim(); });
+    if (form.id === 'loginform' || form.id === 'setpwform' || form.id === 'pwform') {
+      if (!window.crypto || !crypto.subtle) { showErr('HTTPS required'); return; }
+      var pw = fd.get('pw') || '';
+      if (form.id === 'loginform') {
+        checkPassword(pw).then(function (ok) { if (ok) { setUnlocked(true); route(); } else { showErr(t('login_wrong')); form.reset(); } });
+        return;
+      }
+      if (pw.length < 4) { showErr(t('pw_short')); return; }
+      if (pw !== fd.get('pw2')) { showErr(t('pw_mismatch')); return; }
+      setPassword(pw).then(function () { setUnlocked(true); toast(t('pw_saved')); if (form.id === 'pwform') renderCompany(); else route(); });
+      return;
+    }
     if (form.id === 'custform') {
       var id = form.dataset.id, ret = form.dataset.ret, c;
       if (id) { c = findCustomer(id); Object.assign(c, o); }
@@ -847,6 +925,7 @@
         if (!confirm(t('import_confirm'))) return;
         var fresh = defaults();
         S.settings = Object.assign(fresh.settings, data.settings || {}, { onboarded: true });
+        setUnlocked(false);
         S.company = Object.assign(fresh.company, data.company || {});
         S.customers = data.customers || []; S.items = data.items || []; S.docs = data.docs || [];
         S.docs.forEach(function (x) { if (!x.lang) x.lang = 'de'; });

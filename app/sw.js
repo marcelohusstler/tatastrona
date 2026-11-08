@@ -1,6 +1,6 @@
 // Service worker: aplikacja działa offline. Przy każdej zmianie plików podbij numer wersji.
-var VERSION = 'fakturka-v5';
-var FILES = ['./', 'index.html', 'styles.css', 'app.js', 'templates.js', 'i18n.js', 'i18n-more.js', 'templates-i18n.js', 'manifest.webmanifest', 'icons/icon.svg', 'icons/icon-192.png', 'icons/icon-512.png'];
+var VERSION = 'fakturka-v6';
+var FILES = ['./', 'index.html', 'styles.css', 'app.js', 'templates.js', 'i18n.js', 'i18n-more.js', 'i18n-auth.js', 'templates-i18n.js', 'manifest.webmanifest', 'icons/icon.svg', 'icons/icon-192.png', 'icons/icon-512.png'];
 self.addEventListener('install', function (e) {
   e.waitUntil(caches.open(VERSION).then(function (c) { return c.addAll(FILES); }).then(function () { return self.skipWaiting(); }));
 });
