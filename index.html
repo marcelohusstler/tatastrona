@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Fakturka – Rechnungen & Angebote</title>
+  <meta name="description" content="Faktury (Rechnungen) i oferty (Angebote) dla firm w Niemczech – po polsku.">
+  <meta name="theme-color" content="#0f3d5e">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icons/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <a href="#/docs" class="brand"><img src="icons/icon.svg" alt="" width="28" height="28"> Fakturka</a>
+    <span class="saved" id="saved">Zapisano</span>
+  </header>
+
+  <main id="view" class="view"></main>
+
+  <nav class="bottomnav" id="nav">
+    <a href="#/docs" data-nav="docs"><span class="ico">📄</span>Dokumenty</a>
+    <a href="#/customers" data-nav="customers"><span class="ico">👥</span>Klienci</a>
+    <a href="#/items" data-nav="items"><span class="ico">🧰</span>Pozycje</a>
+    <a href="#/company" data-nav="company"><span class="ico">🏢</span>Firma</a>
+  </nav>
+
+  <div id="modal" class="modal" hidden></div>
+  <div id="toast" class="toast" hidden></div>
+
+  <datalist id="units">
+    <option value="Std"><option value="m²"><option value="m"><option value="lfm"><option value="m³">
+    <option value="Stk"><option value="pauschal"><option value="Tag"><option value="km"><option value="kg"><option value="l">
+  </datalist>
+
+  <script src="templates.js"></script>
+  <script src="app.js"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', function () { navigator.serviceWorker.register('sw.js').catch(function () {}); });
+    }
+  </script>
+</body>
+</html>
