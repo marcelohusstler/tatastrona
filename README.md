@@ -1,5 +1,7 @@
 # Fakturka – Rechnungen & Angebote
 
+Strona: `index.html` (informacje), `poradnik.html` (poradnik), `impressum.html`, `datenschutz.html`. Aplikacja: folder `app/`.
+
 Aplikacja do wystawiania faktur (Rechnungen) i ofert (Angebote) dla małych firm w Niemczech.
 Interfejs jest po polsku, a dokumenty powstają po niemiecku. Działa w przeglądarce na telefonie i komputerze i można ją dodać do ekranu głównego (PWA).
 
@@ -22,7 +24,7 @@ Interfejs jest po polsku, a dokumenty powstają po niemiecku. Działa w przeglą
 ## Pliki
 | Plik | Co zawiera |
 |---|---|
-| `index.html` | szkielet strony |
+| `app/index.html` | szkielet aplikacji (pliki aplikacji leżą w `app/`) |
 | `app.js` | cała logika aplikacji |
 | `styles.css` | wygląd aplikacji i wydruku A4 |
 | `templates.js` | szablony branżowe w 3 językach – tu dopisujesz nowe branże |
@@ -35,7 +37,10 @@ Aplikacja nie wymaga budowania ani instalacji: zwykłe pliki HTML, CSS i JS.
 ```
 python3 -m http.server 8000
 ```
-Potem otwórz http://localhost:8000.
+Potem otwórz http://localhost:8000 (strona) albo http://localhost:8000/app/ (aplikacja).
+
+## Przed publicznym startem
+Uzupełnij żółte pola w `impressum.html` i `datenschutz.html` (imię, adres, e-mail, telefon).
 
 ## Ograniczenia (do zrobienia)
 - Dane są zapisywane tylko na urządzeniu (localStorage) i nie synchronizują się między urządzeniami. Potrzebne będzie konto i chmura.

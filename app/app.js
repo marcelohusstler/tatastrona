@@ -623,7 +623,8 @@
       }).join('') + '</select>', t('my_branch_hint')) + '</section>' +
       '<section class="box"><h2>' + t('backup') + '</h2><p class="muted small">' + t('backup_info') + '</p>' +
       '<div class="row2"><button class="btn" data-act="export">' + t('download') + '</button><label class="btn file">' + t('upload') + '<input type="file" accept="application/json,.json" id="import" hidden></label></div>' +
-      '<button class="btn danger" data-act="wipe">' + t('wipe') + '</button></section>';
+      '<button class="btn danger" data-act="wipe">' + t('wipe') + '</button></section>' +
+      '<p class="legal small center"><a href="../poradnik.html">' + t('guide') + '</a> · <a href="../impressum.html">Impressum</a> · <a href="../datenschutz.html">Datenschutz</a></p>';
   }
 
   // ---------- Zdarzenia ----------

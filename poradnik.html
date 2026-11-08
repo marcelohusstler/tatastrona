@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Poradnik – faktury w Niemczech po polsku | Fakturka</title>
+  <meta name="description" content="Jak wystawić fakturę w Niemczech: obowiązkowe elementy Rechnung, Kleinunternehmer, Reverse Charge §13b, §35a, e-faktura 2027/2028, przechowywanie, korekty. Plus instrukcja aplikacji Fakturka.">
+  <meta name="theme-color" content="#0f3d5e">
+  <link rel="icon" href="app/icons/icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="site.css">
+</head>
+<body>
+  <header class="nav">
+    <div class="wrap">
+      <a class="logo" href="index.html"><img src="app/icons/icon.svg" alt="" width="30" height="30"> Fakturka</a>
+      <nav class="nav-links">
+        <a href="index.html#funkcje">Funkcje</a>
+        <a href="poradnik.html">Poradnik</a>
+        <a href="index.html#faq">Pytania</a>
+      </nav>
+      <a class="btn sm" href="app/index.html">Otwórz aplikację</a>
+    </div>
+  </header>
+
+  <main class="doc-page">
+    <div class="wrap">
+      <aside class="toc">
+        <b>Aplikacja krok po kroku</b>
+        <a href="#start">1. Otwórz i zainstaluj</a>
+        <a href="#konfiguracja">2. Ustaw firmę</a>
+        <a href="#oferta">3. Pierwsza oferta</a>
+        <a href="#faktura">4. Z oferty faktura</a>
+        <a href="#pdf">5. PDF i wysyłka</a>
+        <a href="#pozycje">6. Własne pozycje i ceny</a>
+        <a href="#logo">7. Logo firmy</a>
+        <a href="#kopia">8. Kopia zapasowa</a>
+        <b>Faktury w Niemczech</b>
+        <a href="#pflichtangaben">Co musi być na fakturze</a>
+        <a href="#kiedy">Kiedy trzeba wystawić fakturę</a>
+        <a href="#kleinunternehmer">Kleinunternehmer (bez VAT)</a>
+        <a href="#reverse-charge">Reverse Charge §13b</a>
+        <a href="#35a">§35a – robocizna dla klienta</a>
+        <a href="#angebot">Angebot czy Kostenvoranschlag</a>
+        <a href="#e-rechnung">E-faktura 2025–2028</a>
+        <a href="#korekta">Błąd na fakturze – co robić</a>
+        <a href="#przechowywanie">Jak długo przechowywać</a>
+        <a href="#slownik">Słowniczek PL–DE</a>
+      </aside>
+
+      <article>
+        <h1>Poradnik</h1>
+        <p class="lead">Jak korzystać z Fakturki i co trzeba wiedzieć o fakturach w Niemczech – krótko i po polsku.</p>
+        <div class="note"><b>Ważne:</b> to informacje ogólne (stan: listopad 2026), a nie porada podatkowa. Przepisy się zmieniają, a każda firma jest inna – w sprawach indywidualnych zapytaj swojego Steuerberatera.</div>
+
+        <div class="part">Część 1 · Aplikacja krok po kroku</div>
+
+        <h2 id="start">1. Otwórz i zainstaluj na telefonie</h2>
+        <p>Fakturka działa w przeglądarce – nie musisz niczego pobierać ze sklepu. Otwórz <a href="app/index.html">aplikację</a>, a potem dodaj ją do ekranu głównego, żeby mieć ikonkę jak przy zwykłej apce:</p>
+        <ul>
+          <li><b>iPhone (Safari):</b> stuknij przycisk <i>Udostępnij</i> (kwadrat ze strzałką) → <i>Do ekranu początkowego</i> → <i>Dodaj</i>.</li>
+          <li><b>Android (Chrome):</b> stuknij <i>⋮</i> w prawym górnym rogu → <i>Dodaj do ekranu głównego</i> albo <i>Zainstaluj aplikację</i>.</li>
+          <li><b>Komputer:</b> po prostu otwórz stronę. W Chrome możesz też kliknąć ikonkę instalacji w pasku adresu.</li>
+        </ul>
+        <div class="tipbox">💡 Dane zapisują się w przeglądarce, w której pracujesz. Faktury wystawione na telefonie nie pojawią się same na komputerze – do przenoszenia służy <a href="#kopia">kopia zapasowa</a>.</div>
+
+        <h2 id="konfiguracja">2. Ustaw firmę (przewodnik)</h2>
+        <p>Przy pierwszym uruchomieniu przewodnik zapyta Cię po kolei o:</p>
+        <ol>
+          <li><b>Język aplikacji</b> – polski, niemiecki albo angielski.</li>
+          <li><b>Język dokumentów</b> – dla klientów w Niemczech wybierz niemiecki.</li>
+          <li><b>Branżę</b> – dostaniesz gotowe pozycje (np. „Wandanstrich pro m²”).</li>
+          <li><b>Dane firmy</b> – nazwa i pełny adres są obowiązkowe na fakturze.</li>
+          <li><b>Podatki</b> – czy jesteś Kleinunternehmer i Twój numer podatkowy (Steuernummer).</li>
+          <li><b>Konto bankowe</b> – IBAN pojawi się w stopce faktury.</li>
+          <li><b>Logo</b> – opcjonalnie, ale wygląda profesjonalnie.</li>
+        </ol>
+        <p>Wszystko zmienisz później w zakładce <b>Firma</b>. Tam też możesz uruchomić przewodnik od nowa.</p>
+        <img class="inline-shot" src="assets/wizard.jpg" alt="Przewodnik – wybór branży" loading="lazy">
+
+        <h2 id="oferta">3. Pierwsza oferta (Angebot)</h2>
+        <ol>
+          <li>W zakładce <b>Dokumenty</b> stuknij <b>+ Nowa oferta</b>.</li>
+          <li>Wybierz klienta albo dodaj nowego (<i>+ Nowy klient…</i>). Zaznacz, czy to firma, czy osoba prywatna.</li>
+          <li>Stuknij <b>+ Z szablonu / katalogu</b> i dotykaj pozycji, które chcesz dodać. Potem <b>Gotowe</b>.</li>
+          <li>Wpisz ilości (np. 64 m²) i popraw ceny. Suma, VAT i robocizna liczą się same.</li>
+          <li>Na dole możesz zmienić tekst wstępu i zakończenia.</li>
+          <li>Stuknij <b>Podgląd / PDF</b>.</li>
+        </ol>
+        <p>Wszystko zapisuje się automatycznie – nie ma przycisku „Zapisz”.</p>
+
+        <h2 id="faktura">4. Z oferty faktura (Rechnung)</h2>
+        <p>Gdy klient przyjmie ofertę, otwórz ją i stuknij <b>Zamień na fakturę</b>. Powstaje nowa faktura z tymi samymi pozycjami i odnośnikiem do numeru oferty. Uzupełnij <b>datę wykonania usługi</b> (Leistungsdatum) – jest obowiązkowa.</p>
+        <p>Po wysłaniu ustaw status <b>Wysłana – nieopłacona</b>, a po przelewie <b>Zapłacona</b>. Na liście dokumentów zobaczysz sumę do zapłaty i faktury po terminie.</p>
+
+        <h2 id="pdf">5. PDF i wysyłka do klienta</h2>
+        <p>W podglądzie stuknij <b>Drukuj / Zapisz PDF</b>. Plik dostanie nazwę z numerem faktury i klientem. Dalej:</p>
+        <ul>
+          <li><b>iPhone:</b> w oknie drukowania stuknij ikonę <i>Udostępnij</i> u góry → <i>Zachowaj w Plikach</i> albo od razu wyślij przez WhatsApp lub Mail.</li>
+          <li><b>Android:</b> jako drukarkę wybierz <i>Zapisz jako PDF</i> → stuknij ikonkę PDF → plik trafi do Pobranych.</li>
+          <li><b>Komputer:</b> jako drukarkę wybierz <i>Zapisz jako PDF</i>.</li>
+        </ul>
+        <div class="tipbox">💡 Jeśli nad podglądem widzisz czerwoną ramkę „Sprawdź przed wysłaniem”, uzupełnij brakujące dane – np. Steuernummer albo IBAN.</div>
+
+        <h2 id="pozycje">6. Własne pozycje i ceny</h2>
+        <p>W zakładce <b>Pozycje</b> budujesz swój cennik. Możesz:</p>
+        <ul>
+          <li>skopiować pozycje z szablonu branży (jedną albo całą branżę naraz) i zmienić ceny na swoje,</li>
+          <li>dodać zupełnie nową pozycję (<b>+ Nowa</b>),</li>
+          <li>w trakcie pisania faktury stuknąć <b>☆ Zapisz w moich pozycjach</b> przy dowolnej pozycji.</li>
+        </ul>
+        <p>Każda pozycja ma rodzaj: <b>Robocizna</b>, <b>Materiał</b> albo <b>Inne</b>. To ważne, bo robociznę klient prywatny może odliczyć od podatku – zobacz <a href="#35a">§35a</a>.</p>
+
+        <h2 id="logo">7. Logo firmy</h2>
+        <ul>
+          <li><b>Masz plik z logo</b> (od grafika, ze strony www)? Zakładka <b>Firma</b> → <b>Wybierz zdjęcie logo</b>.</li>
+          <li><b>Nie masz pliku?</b> Zrób zdjęcie logo z wizytówki, auta albo papieru firmowego – na białym tle i w dobrym świetle. Możesz też zrobić zrzut ekranu ze swojej strony lub Facebooka i przyciąć go w galerii.</li>
+        </ul>
+        <p>Białe marginesy wokół logo aplikacja przytnie sama.</p>
+
+        <h2 id="kopia">8. Kopia zapasowa</h2>
+        <p>Dane są tylko na Twoim urządzeniu. Jeśli zgubisz telefon albo wyczyścisz przeglądarkę, znikną. Dlatego:</p>
+        <ol>
+          <li>Raz w miesiącu: <b>Firma</b> → <b>Kopia zapasowa</b> → <b>Pobierz kopię</b>. Zapisz plik np. na Google Drive, iCloud albo wyślij sobie mailem.</li>
+          <li>Na nowym telefonie lub komputerze: <b>Firma</b> → <b>Wczytaj kopię</b> i wybierz ten plik.</li>
+        </ol>
+        <div class="note">Faktury trzeba przechowywać przez lata (zobacz <a href="#przechowywanie">niżej</a>). Zapisuj też gotowe PDF-y w bezpiecznym miejscu – sama aplikacja na telefonie to za mało.</div>
+
+        <div class="part">Część 2 · Faktury w Niemczech</div>
+
+        <h2 id="pflichtangaben">Co musi być na fakturze (Pflichtangaben)</h2>
+        <p>Niemiecka ustawa o VAT (§ 14 ust. 4 UStG) wymienia elementy, które muszą znaleźć się na fakturze. Jeśli czegoś brakuje, klient-firma może nie odliczyć VAT i poprosi o poprawioną fakturę.</p>
+        <table class="t">
+          <tr><th>Co</th><th>Po niemiecku</th></tr>
+          <tr><td>Pełna nazwa i adres Twojej firmy oraz klienta</td><td>Name und Anschrift</td></tr>
+          <tr><td>Twój numer podatkowy albo numer VAT UE</td><td>Steuernummer / USt-IdNr.</td></tr>
+          <tr><td>Data wystawienia</td><td>Rechnungsdatum</td></tr>
+          <tr><td>Kolejny, niepowtarzalny numer faktury</td><td>Rechnungsnummer</td></tr>
+          <tr><td>Ilość i rodzaj towaru albo zakres i rodzaj usługi</td><td>Menge und Art der Leistung</td></tr>
+          <tr><td>Data (lub okres) wykonania usługi</td><td>Leistungsdatum / Leistungszeitraum</td></tr>
+          <tr><td>Kwota netto w podziale na stawki VAT i ewentualne uzgodnione rabaty (np. Skonto)</td><td>Entgelt</td></tr>
+          <tr><td>Stawka i kwota VAT albo informacja, dlaczego VAT nie ma</td><td>Steuersatz und Steuerbetrag</td></tr>
+          <tr><td>Przy pracach przy budynku/działce dla osoby prywatnej: informacja, że klient musi przechowywać fakturę 2 lata</td><td>Aufbewahrungshinweis</td></tr>
+        </table>
+        <p>Fakturka drukuje te elementy automatycznie, a jeśli czegoś brakuje w Twoich danych – ostrzega w podglądzie.</p>
+        <div class="tipbox"><b>Mała faktura do 250 € brutto</b> (Kleinbetragsrechnung) może być uproszczona: wystarczą nazwa i adres Twojej firmy, data, opis usługi oraz kwota brutto ze stawką VAT. Nie dotyczy to np. Reverse Charge.</div>
+
+        <h2 id="kiedy">Kiedy trzeba wystawić fakturę</h2>
+        <ul>
+          <li><b>Klient to firma:</b> fakturę trzeba wystawić w ciągu 6 miesięcy od wykonania usługi.</li>
+          <li><b>Klient prywatny + prace przy budynku lub działce</b> (remont, malowanie, ogród, instalacje): tu też obowiązuje faktura w ciągu 6 miesięcy – i musi mieć dopisek o 2-letnim przechowywaniu. W Fakturce zaznaczasz to jednym checkboxem.</li>
+          <li><b>Inne usługi dla osób prywatnych:</b> faktura nie zawsze jest obowiązkowa, ale klient zwykle jej chce – choćby do odliczenia §35a.</li>
+        </ul>
+
+        <h2 id="kleinunternehmer">Kleinunternehmer – faktura bez VAT</h2>
+        <p>Mała firma może korzystać z tzw. regulacji dla małych przedsiębiorców (§ 19 UStG) i nie doliczać VAT. Od 2025 roku obowiązują limity obrotu:</p>
+        <ul>
+          <li>w <b>poprzednim roku</b> nie więcej niż <b>25 000 €</b>,</li>
+          <li>w <b>bieżącym roku</b> nie więcej niż <b>100 000 €</b>. Ten limit działa natychmiast – faktura, którą go przekraczasz, musi już mieć VAT.</li>
+        </ul>
+        <p>W roku założenia firmy granicą jest 25 000 €. Liczy się obrót (przychód), nie zysk.</p>
+        <p>Na fakturze Kleinunternehmer nie pokazuje VAT, tylko dopisuje informację o zwolnieniu, np.:</p>
+        <p class="example">Gemäß § 19 UStG wird keine Umsatzsteuer berechnet.</p>
+        <p>W Fakturce wystarczy zaznaczyć „Jestem Kleinunternehmer” w zakładce Firma – dopisek pojawi się sam.</p>
+        <div class="note">Uwaga: rezygnacja z tej regulacji wiąże Cię na 5 lat. Decyzję o statusie podejmujesz w zgłoszeniu do Finanzamtu – omów ją ze Steuerberaterem.</div>
+
+        <h2 id="reverse-charge">Reverse Charge w budowlance (§ 13b UStG)</h2>
+        <p>Jeśli wykonujesz <b>prace budowlane</b> (np. jako podwykonawca) dla firmy, która <b>sama wykonuje prace budowlane</b>, VAT rozlicza nie Ty, tylko Twój klient. Wtedy:</p>
+        <ul>
+          <li>wystawiasz fakturę <b>bez VAT</b> (tylko kwota netto),</li>
+          <li>dopisujesz informację o przeniesieniu obowiązku podatkowego,</li>
+          <li>podajesz numer VAT UE klienta (jeśli go ma).</li>
+        </ul>
+        <p class="example">Steuerschuldnerschaft des Leistungsempfängers gemäß § 13b UStG.</p>
+        <p>Klient zwykle potwierdza swój status zaświadczeniem z urzędu skarbowego (formularz USt 1 TG) – poproś o kopię i zachowaj ją. W Fakturce wybierz stawkę <b>0% – Reverse Charge §13b</b>.</p>
+        <div class="note">Reverse Charge <b>nie dotyczy</b> klientów prywatnych ani firm, które nie zajmują się budową (np. biuro, które zamawia malowanie). Pomyłka oznacza, że to Ty możesz musieć zapłacić VAT – w razie wątpliwości zapytaj Steuerberatera.</div>
+
+        <h2 id="35a">§ 35a – argument, który sprzedaje</h2>
+        <p>Klient prywatny może odliczyć od swojego podatku dochodowego część kosztów robocizny za prace w swoim mieszkaniu lub domu:</p>
+        <ul>
+          <li><b>usługi rzemieślnicze</b> (remonty, naprawy, malowanie, instalacje): 20% kosztów robocizny, maksymalnie 1 200 € rocznie,</li>
+          <li><b>usługi domowe</b> (np. sprzątanie, ogród): 20%, maksymalnie 4 000 € rocznie.</li>
+        </ul>
+        <p>Warunki: klient ma fakturę, na której robocizna jest wykazana osobno, i zapłacił <b>przelewem</b> (nie gotówką). Liczy się robocizna oraz koszty dojazdu i maszyn – materiał nie.</p>
+        <div class="tipbox">💡 Jeśli chcesz, żeby dojazd też był wykazany jako koszt odliczalny, ustaw tej pozycji rodzaj „Robocizna”.</div>
+        <p>Fakturka sama wylicza robociznę (pozycje typu „Robocizna”) i drukuje ją osobno. Powiedz o tym klientowi – „część tej kwoty odliczy Pan od podatku” to mocny argument przy ofercie.</p>
+
+        <h2 id="angebot">Angebot czy Kostenvoranschlag?</h2>
+        <ul>
+          <li><b>Angebot (oferta)</b> – zwykle wiąże Cię podaną ceną, jeśli klient ją przyjmie. Ustal termin ważności (Fakturka domyślnie daje 30 dni).</li>
+          <li><b>Kostenvoranschlag (kosztorys)</b> – szacunek kosztów. Przy większym przekroczeniu trzeba niezwłocznie poinformować klienta, a on może zrezygnować.</li>
+        </ul>
+        <p>Jeśli nie jesteś pewien zakresu prac, napisz to wyraźnie w ofercie (np. że ilości zostaną rozliczone według faktycznego obmiaru – „Abrechnung nach Aufmaß”).</p>
+
+        <h2 id="e-rechnung">E-faktura (E-Rechnung) 2025–2028</h2>
+        <p>Niemcy wprowadzają obowiązkowe e-faktury między firmami. E-faktura to nie PDF, tylko plik w ustrukturyzowanym formacie (XRechnung albo ZUGFeRD), który komputer klienta odczyta automatycznie.</p>
+        <table class="t">
+          <tr><th>Od kiedy</th><th>Co</th></tr>
+          <tr><td>1.01.2025</td><td>Każda firma musi umieć <b>odbierać</b> e-faktury (wystarczy np. adres e-mail).</td></tr>
+          <tr><td>1.01.2027</td><td>Firmy z obrotem powyżej 800 000 € w poprzednim roku muszą <b>wysyłać</b> e-faktury do innych firm.</td></tr>
+          <tr><td>1.01.2028</td><td>Obowiązek wysyłania obejmuje wszystkie firmy przy fakturach dla innych firm.</td></tr>
+        </table>
+        <p><b>Kogo nie dotyczy wysyłanie:</b> faktur dla klientów prywatnych, małych faktur do 250 € oraz Kleinunternehmerów (oni muszą tylko umieć odbierać).</p>
+        <p>Fakturka na razie tworzy zwykłe PDF-y. Obsługa XRechnung/ZUGFeRD jest w planach przed 2028 rokiem.</p>
+
+        <h2 id="korekta">Błąd na fakturze – co robić</h2>
+        <ul>
+          <li><b>Nie zmieniaj po cichu</b> faktury, którą klient już dostał, i nie nadawaj tego samego numeru drugi raz.</li>
+          <li>Wystaw <b>fakturę korygującą</b> albo <b>fakturę storno</b> (Stornorechnung) z odwołaniem do numeru błędnej faktury, a potem nową, poprawną fakturę z nowym numerem.</li>
+          <li>Drobne braki (np. brak daty wykonania usługi) można uzupełnić dokumentem korygującym, który jasno wskazuje, której faktury dotyczy.</li>
+        </ul>
+        <p>Automatyczna faktura storno jest w planach rozwoju Fakturki. Do tego czasu: zrób duplikat błędnej faktury, nazwij go „Stornorechnung zu RE-…” i wpisz kwoty ze znakiem minus.</p>
+
+        <h2 id="przechowywanie">Jak długo przechowywać faktury</h2>
+        <p>Faktury (wystawione i otrzymane) przechowuje się <b>8 lat</b> – tak jest od 2025 roku (wcześniej było 10). Okres liczy się od końca roku, w którym wystawiono fakturę. Pliki muszą być czytelne przez cały ten czas i nie można ich zmieniać.</p>
+        <p>Praktycznie: zapisuj każdy wysłany PDF w jednym folderze w chmurze (np. „Rechnungen 2026”) i rób regularne <a href="#kopia">kopie zapasowe</a> aplikacji.</p>
+
+        <h2 id="slownik">Słowniczek PL–DE</h2>
+        <table class="t">
+          <tr><th>Po polsku</th><th>Po niemiecku</th></tr>
+          <tr><td>Faktura</td><td>Rechnung</td></tr>
+          <tr><td>Oferta</td><td>Angebot</td></tr>
+          <tr><td>Kosztorys</td><td>Kostenvoranschlag</td></tr>
+          <tr><td>Faktura zaliczkowa</td><td>Abschlagsrechnung</td></tr>
+          <tr><td>Faktura korygująca / storno</td><td>Rechnungskorrektur / Stornorechnung</td></tr>
+          <tr><td>Wezwanie do zapłaty</td><td>Zahlungserinnerung / Mahnung</td></tr>
+          <tr><td>Urząd skarbowy</td><td>Finanzamt</td></tr>
+          <tr><td>Doradca podatkowy</td><td>Steuerberater</td></tr>
+          <tr><td>Numer podatkowy</td><td>Steuernummer</td></tr>
+          <tr><td>Numer VAT UE</td><td>Umsatzsteuer-Identifikationsnummer (USt-IdNr.)</td></tr>
+          <tr><td>VAT</td><td>Umsatzsteuer (USt.) / Mehrwertsteuer (MwSt.)</td></tr>
+          <tr><td>Kwota netto / brutto</td><td>Nettobetrag / Bruttobetrag</td></tr>
+          <tr><td>Data wykonania usługi</td><td>Leistungsdatum</td></tr>
+          <tr><td>Termin płatności</td><td>Zahlungsziel</td></tr>
+          <tr><td>Rejestracja działalności</td><td>Gewerbeanmeldung</td></tr>
+          <tr><td>Robocizna</td><td>Arbeitslohn / Arbeitskosten</td></tr>
+          <tr><td>Obmiar</td><td>Aufmaß</td></tr>
+        </table>
+
+        <div class="band" style="margin-top:48px">
+          <h2>Gotowy na pierwszą fakturę?</h2>
+          <p>Za darmo, bez konta, po polsku.</p>
+          <a class="btn" href="app/index.html">Otwórz Fakturkę →</a>
+        </div>
+      </article>
+    </div>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <span>© 2026 Fakturka</span>
+      <nav><a href="index.html">Strona główna</a><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a></nav>
+      <p class="disclaimer">Informacje ogólne, stan na listopad 2026. Nie stanowią porady podatkowej ani prawnej.</p>
+    </div>
+  </footer>
+</body>
+</html>

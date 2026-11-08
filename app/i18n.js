@@ -14,7 +14,7 @@ window.UNITS = {
 
 window.UI = {
   pl: {
-    nav_docs: 'Dokumenty', nav_customers: 'Klienci', nav_items: 'Pozycje', nav_company: 'Firma', saved: 'Zapisano',
+    guide: 'Poradnik', nav_docs: 'Dokumenty', nav_customers: 'Klienci', nav_items: 'Pozycje', nav_company: 'Firma', saved: 'Zapisano',
     banner_setup: '<strong>Zacznij tutaj:</strong> uzupełnij dane swojej firmy. Bez nich faktura nie jest ważna. →',
     to_pay: 'Do zapłaty', paid_year: 'Zapłacone {y}', n_overdue: '{n} po terminie',
     new_invoice: '+ Nowa faktura', new_offer: '+ Nowa oferta', f_all: 'Wszystkie', f_inv: 'Faktury', f_off: 'Oferty',
@@ -95,7 +95,7 @@ window.UI = {
     wz_first_offer: 'Utwórz pierwszą ofertę', wz_go_app: 'Przejdź do aplikacji'
   },
   de: {
-    nav_docs: 'Dokumente', nav_customers: 'Kunden', nav_items: 'Positionen', nav_company: 'Firma', saved: 'Gespeichert',
+    guide: 'Anleitung', nav_docs: 'Dokumente', nav_customers: 'Kunden', nav_items: 'Positionen', nav_company: 'Firma', saved: 'Gespeichert',
     banner_setup: '<strong>Hier starten:</strong> Firmendaten ausfüllen. Ohne sie ist die Rechnung nicht gültig. →',
     to_pay: 'Offen', paid_year: 'Bezahlt {y}', n_overdue: '{n} überfällig',
     new_invoice: '+ Neue Rechnung', new_offer: '+ Neues Angebot', f_all: 'Alle', f_inv: 'Rechnungen', f_off: 'Angebote',
@@ -175,7 +175,7 @@ window.UI = {
     wz_first_offer: 'Erstes Angebot erstellen', wz_go_app: 'Zur App'
   },
   en: {
-    nav_docs: 'Documents', nav_customers: 'Customers', nav_items: 'Items', nav_company: 'Company', saved: 'Saved',
+    guide: 'Guide', nav_docs: 'Documents', nav_customers: 'Customers', nav_items: 'Items', nav_company: 'Company', saved: 'Saved',
     banner_setup: '<strong>Start here:</strong> fill in your company details. Without them the invoice is not valid. →',
     to_pay: 'Outstanding', paid_year: 'Paid {y}', n_overdue: '{n} overdue',
     new_invoice: '+ New invoice', new_offer: '+ New quote', f_all: 'All', f_inv: 'Invoices', f_off: 'Quotes',

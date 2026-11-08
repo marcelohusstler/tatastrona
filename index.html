@@ -2,47 +2,146 @@
 <html lang="pl">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>Fakturka – Rechnungen & Angebote</title>
-  <meta name="description" content="Faktury (Rechnungen) i oferty (Angebote) dla firm w Niemczech – po polsku.">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Fakturka – faktury i oferty po niemiecku, obsługa po polsku</title>
+  <meta name="description" content="Darmowa aplikacja dla polskich firm i rzemieślników w Niemczech. Rechnung i Angebot po niemiecku w 2 minuty – z telefonu. Szablony dla 17 branż, Kleinunternehmer, §13b, §35a.">
+  <meta property="og:title" content="Fakturka – faktury po niemiecku, obsługa po polsku">
+  <meta property="og:description" content="Rechnung i Angebot w 2 minuty z telefonu. Dla polskich firm w Niemczech.">
   <meta name="theme-color" content="#0f3d5e">
-  <link rel="manifest" href="manifest.webmanifest">
-  <link rel="icon" href="icons/icon.svg" type="image/svg+xml">
-  <link rel="apple-touch-icon" href="icons/icon-192.png">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="default">
-  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" href="app/icons/icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="site.css">
 </head>
 <body>
-  <header class="topbar">
-    <a href="#/docs" class="brand"><img src="icons/icon.svg" alt="" width="28" height="28"> Fakturka</a>
-    <span class="saved" id="saved">Zapisano</span>
+  <header class="nav">
+    <div class="wrap">
+      <a class="logo" href="index.html"><img src="app/icons/icon.svg" alt="" width="30" height="30"> Fakturka</a>
+      <nav class="nav-links">
+        <a href="#funkcje">Funkcje</a>
+        <a href="#jak">Jak to działa</a>
+        <a href="poradnik.html">Poradnik</a>
+        <a href="#faq">Pytania</a>
+      </nav>
+      <a class="btn sm" href="app/index.html">Otwórz aplikację</a>
+    </div>
   </header>
 
-  <main id="view" class="view"></main>
+  <section class="hero">
+    <div class="wrap">
+      <div>
+        <span class="badge">Wersja testowa · za darmo</span>
+        <h1>Faktury po niemiecku.<br>Obsługa po polsku.</h1>
+        <p class="lead">Aplikacja dla polskich firm i rzemieślników w Niemczech. Rechnung i Angebot wystawiasz w 2 minuty – na telefonie, prosto z budowy.</p>
+        <div class="cta">
+          <a class="btn" href="app/index.html">Zacznij za darmo →</a>
+          <a class="btn ghost" href="poradnik.html">Przeczytaj poradnik</a>
+        </div>
+        <ul class="ticks">
+          <li>Bez rejestracji</li>
+          <li>Telefon i komputer</li>
+          <li>Polski · Deutsch · English</li>
+        </ul>
+      </div>
+      <div class="phones">
+        <div class="phone a"><img src="assets/editor.jpg" alt="Edytor faktury w aplikacji Fakturka" loading="eager"></div>
+        <div class="phone b"><img src="assets/pdf.jpg" alt="Podgląd faktury PDF po niemiecku" loading="eager"></div>
+      </div>
+    </div>
+  </section>
 
-  <nav class="bottomnav" id="nav">
-    <a href="#/docs" data-nav="docs"><span class="ico">📄</span><span class="lbl">Dokumenty</span></a>
-    <a href="#/customers" data-nav="customers"><span class="ico">👥</span><span class="lbl">Klienci</span></a>
-    <a href="#/items" data-nav="items"><span class="ico">🧰</span><span class="lbl">Pozycje</span></a>
-    <a href="#/company" data-nav="company"><span class="ico">🏢</span><span class="lbl">Firma</span></a>
-  </nav>
+  <section id="funkcje">
+    <div class="wrap">
+      <div class="center">
+        <h2>Wszystko, czego potrzebuje mała firma w Niemczech</h2>
+        <p class="lead">Ty klikasz po polsku, klient dostaje porządny dokument po niemiecku – z wszystkimi obowiązkowymi danymi.</p>
+      </div>
+      <div class="grid">
+        <div class="card"><span class="ic">🇵🇱→🇩🇪</span><h3>Po polsku, dla Niemców</h3><p>Aplikacja mówi do Ciebie po polsku, a faktura wychodzi po niemiecku. Dla klientów z zagranicy – po angielsku lub polsku.</p></div>
+        <div class="card"><span class="ic">🧰</span><h3>Szablony 17 branż</h3><p>Malarz, elektryk, glazurnik, dekarz, sprzątanie, przeprowadzki i inne. Gotowe pozycje po niemiecku – zmieniasz tylko ceny.</p></div>
+        <div class="card"><span class="ic">🔁</span><h3>Oferta → faktura</h3><p>Klient przyjął Angebot? Jednym kliknięciem robisz z niego Rechnung. Bez przepisywania.</p></div>
+        <div class="card"><span class="ic">§</span><h3>Przepisy w pakiecie</h3><p>Kleinunternehmer (§19), Reverse Charge w budowlance (§13b), koszty robocizny dla klienta (§35a) – adnotacje dodają się same.</p></div>
+        <div class="card"><span class="ic">✅</span><h3>Kontrola przed wysłaniem</h3><p>Brakuje Steuernummer, IBAN albo adresu? Aplikacja ostrzeże, zanim wyślesz niepełną fakturę.</p></div>
+        <div class="card"><span class="ic">📄</span><h3>PDF z telefonu</h3><p>Ładny dokument A4 z Twoim logo. Zapisujesz jako PDF i wysyłasz mailem albo przez WhatsApp.</p></div>
+        <div class="card"><span class="ic">📊</span><h3>Wiesz, kto nie zapłacił</h3><p>Lista faktur z oznaczeniem „po terminie” i sumą do zapłaty. Koniec z zapomnianymi przelewami.</p></div>
+        <div class="card"><span class="ic">🔒</span><h3>Twoje dane u Ciebie</h3><p>Wszystko zapisuje się na Twoim urządzeniu. Nie zakładasz konta i nic nie wysyłamy na serwer.</p></div>
+      </div>
+    </div>
+  </section>
 
-  <div id="modal" class="modal" hidden></div>
-  <div id="toast" class="toast" hidden></div>
+  <section id="jak" class="alt">
+    <div class="wrap">
+      <div class="center">
+        <h2>Jak to działa?</h2>
+        <p class="lead">Trzy kroki. Pierwszą ofertę zrobisz, zanim wypijesz kawę.</p>
+      </div>
+      <div class="steps">
+        <div class="step"><div class="shot"><img src="assets/wizard.jpg" alt="Przewodnik: wybór branży" loading="lazy"></div><span class="num">1</span><h3>Ustaw firmę</h3><p>Przewodnik zapyta o język, branżę, dane firmy i logo. Wszystko wyjaśnia po kolei.</p></div>
+        <div class="step"><div class="shot"><img src="assets/picker.jpg" alt="Wybór pozycji z szablonu" loading="lazy"></div><span class="num">2</span><h3>Dodaj pozycje</h3><p>Wybierasz usługi z szablonu swojej branży, wpisujesz ilości – suma i VAT liczą się same.</p></div>
+        <div class="step"><div class="shot"><img src="assets/pdf.jpg" alt="Gotowa faktura PDF" loading="lazy"></div><span class="num">3</span><h3>Wyślij PDF</h3><p>Podgląd, zapis do PDF i wysyłka do klienta. Gotowe.</p></div>
+      </div>
+    </div>
+  </section>
 
-  <datalist id="units">
-    <option value="Std"><option value="m²"><option value="m"><option value="lfm"><option value="m³">
-    <option value="Stk"><option value="pauschal"><option value="Tag"><option value="km"><option value="kg"><option value="l">
-  </datalist>
+  <section>
+    <div class="wrap center">
+      <h2>Szablony dla Twojej branży</h2>
+      <p class="lead">Każda branża ma gotowe pozycje w trzech językach. Brakuje Twojej? Napisz do nas.</p>
+      <div class="chips">
+        <span>🎨 Malarz</span><span>⚡ Elektryk</span><span>🚿 Hydraulik</span><span>🧱 Glazurnik</span><span>📐 Suche zabudowy</span>
+        <span>🪵 Podłogi</span><span>🏠 Dekarz</span><span>🪚 Stolarz</span><span>🏗️ Murarz</span><span>🌳 Ogrodnik</span>
+        <span>🧽 Sprzątanie</span><span>🔧 Hausmeister</span><span>🚚 Przeprowadzki</span><span>🗑️ Opróżnianie mieszkań</span>
+        <span>🪟 Okna i drzwi</span><span>🚗 Mechanik</span><span>💼 Usługi ogólne</span>
+      </div>
+    </div>
+  </section>
 
-  <script src="i18n.js"></script>
-  <script src="templates.js"></script>
-  <script src="app.js"></script>
-  <script>
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', function () { navigator.serviceWorker.register('sw.js').catch(function () {}); });
-    }
-  </script>
+  <section class="alt">
+    <div class="wrap">
+      <div class="center">
+        <h2>Poradnik: faktury w Niemczech bez stresu</h2>
+        <p class="lead">Krótko i po polsku – co musi być na fakturze, kiedy bez VAT i co zmienia się z e-fakturą.</p>
+      </div>
+      <div class="guides">
+        <a href="poradnik.html#pflichtangaben"><b>Co musi być na fakturze?</b><span>Lista obowiązkowych elementów niemieckiej Rechnung.</span></a>
+        <a href="poradnik.html#kleinunternehmer"><b>Kleinunternehmer – faktura bez VAT</b><span>Limity obrotu i jaki dopisek dodać.</span></a>
+        <a href="poradnik.html#reverse-charge"><b>Reverse Charge w budowlance</b><span>Kiedy podwykonawca wystawia fakturę bez VAT (§13b).</span></a>
+        <a href="poradnik.html#35a"><b>§35a – argument dla klienta</b><span>Jak klient prywatny odliczy robociznę od podatku.</span></a>
+        <a href="poradnik.html#e-rechnung"><b>E-faktura 2027/2028</b><span>Co się zmienia i kogo dotyczy.</span></a>
+        <a href="poradnik.html#start"><b>Pierwsze kroki w aplikacji</b><span>Instalacja na telefonie, pierwsza oferta, PDF.</span></a>
+      </div>
+    </div>
+  </section>
+
+  <section id="faq">
+    <div class="wrap">
+      <div class="center"><h2>Najczęstsze pytania</h2></div>
+      <div class="faq">
+        <details><summary>Czy Fakturka jest darmowa?</summary><p>Tak. W fazie testów korzystasz ze wszystkiego za darmo i bez rejestracji. Jeśli w przyszłości pojawią się płatne funkcje (np. kopia w chmurze albo e-faktury), dowiesz się o tym z wyprzedzeniem.</p></details>
+        <details><summary>Gdzie są zapisane moje dane?</summary><p>Tylko na Twoim urządzeniu, w przeglądarce. Nie wysyłamy ich na żaden serwer. Dlatego warto raz w miesiącu pobrać kopię zapasową (zakładka Firma → Kopia zapasowa), zwłaszcza przed zmianą telefonu.</p></details>
+        <details><summary>Czy faktura z Fakturki jest ważna w Niemczech?</summary><p>Aplikacja drukuje wszystkie obowiązkowe elementy z § 14 UStG i ostrzega, gdy czegoś brakuje (np. Steuernummer). Za poprawność danych i stawkę podatku odpowiadasz jednak Ty – w razie wątpliwości zapytaj swojego Steuerberatera.</p></details>
+        <details><summary>Czy mogę wystawić fakturę po polsku?</summary><p>Tak, ale dla klientów i urzędu skarbowego w Niemczech najbezpieczniej jest po niemiecku. Fakturę w innym języku Finanzamt może poprosić przetłumaczyć. Język wybierasz osobno przy każdym dokumencie.</p></details>
+        <details><summary>Czy działa na iPhonie i Androidzie?</summary><p>Tak – w przeglądarce (Safari, Chrome). Możesz dodać ją do ekranu głównego i otwierać jak zwykłą aplikację. Na komputerze działa tak samo.</p></details>
+        <details><summary>Czy Fakturka robi e-faktury (XRechnung, ZUGFeRD)?</summary><p>Jeszcze nie – to następna duża funkcja. Obowiązek wysyłania e-faktur do firm wchodzi w 2027 i 2028 roku. Faktury dla klientów prywatnych mogą dalej być zwykłym PDF.</p></details>
+        <details><summary>Czy aplikacja zastępuje księgowego?</summary><p>Nie. Fakturka pomaga wystawiać oferty i faktury. Księgowość, deklaracje podatkowe i porady zostają u Twojego Steuerberatera.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="band">
+        <h2>Wystaw pierwszą fakturę jeszcze dziś</h2>
+        <p>Za darmo, bez konta, po polsku.</p>
+        <a class="btn" href="app/index.html">Otwórz Fakturkę →</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap">
+      <span>© 2026 Fakturka</span>
+      <nav><a href="poradnik.html">Poradnik</a><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a></nav>
+      <p class="disclaimer">Informacje na tej stronie mają charakter ogólny i nie są poradą podatkową ani prawną. W sprawach indywidualnych skontaktuj się ze Steuerberaterem.</p>
+    </div>
+  </footer>
 </body>
 </html>
