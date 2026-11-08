@@ -91,6 +91,17 @@
   }
   function dt(lang, key, vars) { var s = (window.DOC[lang] || window.DOC.de)[key]; return fill(s, vars); }
   function unitLabel(u, lang) { var m = window.UNITS[u]; return (m && m[lang]) || u; }
+  var UNIT_CODES = ['Std', 'm²', 'm', 'lfm', 'm³', 'Stk', 'pauschal', 'Tag', 'km', 'kg', 'l', 'ha'];
+  // Wpisana jednostka (np. „godz.”) → kod zapisywany w danych (np. „Std”), żeby tłumaczyła się na dokumencie.
+  function unitCode(v) {
+    var s = String(v || '').trim(), low = s.toLowerCase();
+    for (var code in window.UNITS) {
+      if (code.toLowerCase() === low) return code;
+      var m = window.UNITS[code];
+      for (var l in m) if (String(m[l]).toLowerCase() === low) return code;
+    }
+    return s;
+  }
   function tplItems(v, lang) {
     var col = { de: 0, pl: 1, en: 2 }[lang], extra = (window.TPL_LANG_COL || {})[lang];
     return v.items.map(function (r) {
@@ -117,7 +128,7 @@
   }
 
   // ---------- Logika dokumentów ----------
-  var VAT_RATE = { '19': 19, '7': 7, '13b': 0, klein: 0 };
+  var VAT_RATE = { '19': 19, '7': 7, '24': 7.8, '13b': 0, klein: 0 }; // §24: ryczałt rolników, sprawdzaj co roku
   var TYPES = ['arbeit', 'material', 'sonstiges'];
   var STATUS = { rechnung: ['entwurf', 'offen', 'bezahlt'], angebot: ['entwurf', 'gesendet', 'angenommen', 'abgelehnt'] };
 
@@ -198,6 +209,8 @@
       a.querySelector('.lbl').textContent = t('nav_' + a.getAttribute('data-nav'));
     });
     document.getElementById('saved').textContent = t('saved');
+    var dl = document.getElementById('units');
+    if (dl) dl.innerHTML = UNIT_CODES.map(function (u) { return '<option value="' + esc(unitLabel(u, uiLang())) + '">'; }).join('');
     var help = document.getElementById('helplink');
     if (help) { help.href = guideUrl(); help.title = t('guide'); }
   }
@@ -423,7 +436,7 @@
         '<textarea rows="2" data-p="' + i + '" data-k="name" placeholder="' + t('desc_ph') + '">' + esc(p.name) + '</textarea>' +
         '<div class="pos-row">' +
         field(t('qty'), input('data-p="' + i + '" data-k="qty" inputmode="decimal"', fmtIn(p.qty))) +
-        field(t('unit'), input('data-p="' + i + '" data-k="unit" list="units"', p.unit)) +
+        field(t('unit'), input('data-p="' + i + '" data-k="unit" list="units"', unitLabel(p.unit, uiLang()))) +
         field(t('price_net'), input('data-p="' + i + '" data-k="price" inputmode="decimal"', fmtIn(p.price))) +
         '<div class="pos-total" id="lt-' + i + '">' + money(c.lines[i]) + '</div></div>' +
         '<button class="link" data-act="saveitem" data-i="' + i + '">' + t('save_to_mine') + '</button></div>';
@@ -436,9 +449,9 @@
     if (S.company.kleinunternehmer) {
       h += '<p class="muted small">' + t('klein_info') + '</p>';
     } else {
-      h += field(t('vat_rate'), '<select data-f="vat">' + ['19', '7', '13b'].map(function (k) {
+      h += field(t('vat_rate'), '<select data-f="vat">' + ['19', '7', '24', '13b'].map(function (k) {
         return '<option value="' + k + '"' + (d.vat === k ? ' selected' : '') + '>' + t('vat_' + k) + '</option>';
-      }).join('') + '</select>', d.vat === '13b' ? t('rc_hint') : '');
+      }).join('') + '</select>', d.vat === '13b' ? t('rc_hint') : (d.vat === '24' ? t('vat24_hint') : ''));
     }
     h += '<div id="totals">' + totalsHTML(c) + '</div>';
     h += '<label class="check"><input type="checkbox" data-f="show35a"' + (d.show35a ? ' checked' : '') + '> ' + t('show35a') + '</label>';
@@ -460,7 +473,7 @@
   }
   function totalsHTML(c) {
     var h = '<table class="totals"><tr><td>' + t('net') + '</td><td>' + money(c.net) + '</td></tr>';
-    if (c.mode === '19' || c.mode === '7') h += '<tr><td>' + t('vat') + ' ' + c.rate + '%</td><td>' + money(c.vat) + '</td></tr>';
+    if (c.mode === '19' || c.mode === '7' || c.mode === '24') h += '<tr><td>' + t('vat') + ' ' + numFmt(c.rate, uiLang()) + '%</td><td>' + money(c.vat) + '</td></tr>';
     h += '<tr class="sum"><td>' + t('total') + '</td><td>' + money(c.gross) + '</td></tr>';
     if (c.labor) h += '<tr class="muted"><td>' + t('labor_incl') + '</td><td>' + money(c.laborGross) + '</td></tr>';
     return h + '</table>';
@@ -497,8 +510,11 @@
       .filter(function (o) { return !q || o.it.name.toLowerCase().indexOf(q) > -1; });
     var el = document.getElementById('pk-list');
     if (!items.length) { el.innerHTML = '<div class="empty small">' + t(pickerSrc === 'mine' ? 'no_mine' : 'no_results') + '</div>'; return; }
+    var v = pickerSrc !== 'mine' && pickerLang !== uiLang() ? tplById(pickerSrc) : null;
+    var ui = v ? tplItems(v, uiLang()) : null;
     el.innerHTML = items.map(function (o) {
-      return '<button class="pk-item" data-act="pick" data-i="' + o.i + '"><span>' + esc(o.it.name) +
+      var tr = ui && ui[o.i] && ui[o.i].name !== o.it.name ? '<small class="tr">' + esc(ui[o.i].name) + '</small>' : '';
+      return '<button class="pk-item" data-act="pick" data-i="' + o.i + '"><span>' + esc(o.it.name) + tr +
         '<small>' + t('t_' + (o.it.type || 'sonstiges')) + '</small></span><b>' + money(o.it.price) + '/' + esc(unitLabel(o.it.unit, uiLang())) + '</b></button>';
     }).join('');
   }
@@ -574,13 +590,14 @@
     }).join('');
     h += '</tbody></table>';
     h += '<table class="dp-sum"><tr><td>' + D('net') + '</td><td>' + M(k.net) + '</td></tr>';
-    if (k.mode === '19' || k.mode === '7') h += '<tr><td>' + D('plus_vat', { r: k.rate }) + '</td><td>' + M(k.vat) + '</td></tr>';
+    if (k.mode === '19' || k.mode === '7' || k.mode === '24') h += '<tr><td>' + D('plus_vat', { r: numFmt(k.rate, L) }) + '</td><td>' + M(k.vat) + '</td></tr>';
     if (k.mode === '13b') h += '<tr><td>' + D('vat0') + '</td><td>' + M(0) + '</td></tr>';
     h += '<tr class="sum"><td>' + D(isR ? 'inv_total' : 'off_total') + '</td><td>' + M(k.gross) + '</td></tr></table>';
 
     var notes = [];
     if (k.mode === 'klein') notes.push(D('klein'));
     if (k.mode === '13b') notes.push(D('rc'));
+    if (k.mode === '24') notes.push(D('lf', { r: numFmt(k.rate, L) }));
     if (d.show35a && k.labor > 0) notes.push(D('labor', { x: M(k.laborGross), v: k.rate ? D('labor_vat') : '' }));
     if (isR) {
       notes.push(D('pay', { x: M(k.gross), d: F(dueDate(d)), acc: c.iban ? D('pay_acc') : '', n: esc(d.number) }));
@@ -641,8 +658,10 @@
     }).join('') + '</select>';
     h += '<p class="muted small">' + t('tpl_note') + ' ' + window.LANGS[S.settings.docLang].flag + '</p>';
     h += '<button class="btn" data-act="tplall">' + t('copy_all') + '</button>';
+    var uiItems = S.settings.docLang !== uiLang() ? tplItems(v, uiLang()) : null;
     h += items.map(function (it, i) {
-      return '<div class="card row"><span>' + esc(it.name) + '<small class="muted"> · ' + money(it.price) + '/' + esc(unitLabel(it.unit, uiLang())) + '</small></span>' +
+      var tr = uiItems && uiItems[i].name !== it.name ? '<small class="tr">' + esc(uiItems[i].name) + '</small>' : '';
+      return '<div class="card row"><span>' + esc(it.name) + tr + '<small class="muted"> · ' + money(it.price) + '/' + esc(unitLabel(it.unit, uiLang())) + '</small></span>' +
         '<button class="icon" data-act="tplone" data-i="' + i + '" title="' + t('add_to_mine') + '">＋</button></div>';
     }).join('');
     view.innerHTML = h;
@@ -653,7 +672,7 @@
     view.innerHTML = '<div class="head"><a class="back" href="#/items">' + t('back_items') + '</a><h1>' + t(it.id ? 'edit_item' : 'new_item') + '</h1></div>' +
       '<form id="itemform" class="box" data-id="' + esc(it.id) + '">' +
       field(t('desc_req'), '<textarea name="name" rows="2" required>' + esc(it.name) + '</textarea>') +
-      '<div class="grid2">' + field(t('unit'), input('name="unit" list="units"', it.unit)) +
+      '<div class="grid2">' + field(t('unit'), input('name="unit" list="units"', unitLabel(it.unit, uiLang()))) +
       field(t('price_net'), input('name="price" inputmode="decimal" required', fmtIn(it.price))) + '</div>' +
       field(t('kind'), '<select name="type">' + TYPES.map(function (k) { return '<option value="' + k + '"' + (it.type === k ? ' selected' : '') + '>' + t('t_' + k) + '</option>'; }).join('') + '</select>') +
       '<div class="actions"><button class="btn primary big" type="submit">' + t('save') + '</button>' +
@@ -786,7 +805,7 @@
     var d = findDoc(view.dataset.doc);
     if (el.hasAttribute('data-p') && d && el.tagName !== 'SELECT') {
       var p = d.positions[+el.getAttribute('data-p')], k = el.getAttribute('data-k');
-      p[k] = (k === 'qty' || k === 'price') ? parseNum(el.value) : el.value;
+      p[k] = (k === 'qty' || k === 'price') ? parseNum(el.value) : (k === 'unit' ? unitCode(el.value) : el.value);
       save(); refreshTotals(d); return;
     }
     if (el.hasAttribute('data-f') && d && el.type !== 'checkbox' && el.tagName !== 'SELECT') {
@@ -859,7 +878,7 @@
       save(); toast(t('saved_cust')); go(ret ? '#/doc/' + ret : '#/customers');
     }
     if (form.id === 'itemform') {
-      var iid = form.dataset.id, data = { name: o.name, unit: o.unit, price: parseNum(o.price), type: o.type };
+      var iid = form.dataset.id, data = { name: o.name, unit: unitCode(o.unit), price: parseNum(o.price), type: o.type };
       if (iid) Object.assign(S.items.filter(function (x) { return x.id === iid; })[0], data);
       else S.items.push(Object.assign({ id: uid() }, data));
       save(); toast(t('saved_item')); go('#/items');

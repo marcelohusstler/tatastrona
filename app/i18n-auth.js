@@ -93,5 +93,18 @@
       start_inv: 'Prochain n° de facture', start_off: 'Prochain n° de devis', num_hint: 'Prochain numéro : {x}'
     }
   };
+  var V24 = {
+    pl: ['7,8% – rolnik ryczałtowy (§24)', 'Tylko dla gospodarstw rozliczających się ryczałtem. Stawkę państwo sprawdza co roku – w razie wątpliwości zapytaj doradcę podatkowego.', 'Stawka ryczałtowa dla rolników (§ 24 niemieckiej ustawy o VAT): {r}%.'],
+    de: ['7,8 % – Durchschnittssatz Landwirte (§24)', 'Nur für pauschalierende land- und forstwirtschaftliche Betriebe. Der Satz wird jährlich überprüft – im Zweifel den Steuerberater fragen.', 'Durchschnittssatz gemäß § 24 UStG: {r} %.'],
+    en: ['7.8% – farmers’ flat rate (§24)', 'Only for farms using the flat-rate scheme. The rate is reviewed every year – if in doubt, ask your tax advisor.', 'Flat-rate scheme for farmers (§ 24 UStG): {r} %.'],
+    ru: ['7,8% – фермер, средняя ставка (§24)', 'Только для хозяйств на паушальной системе. Ставка пересматривается ежегодно – при сомнениях спросите консультанта.', 'Средняя ставка для сельхозпроизводителей согласно § 24 UStG: {r} %.'],
+    tr: ['%7,8 – çiftçi ortalama oranı (§24)', 'Sadece götürü usulde vergilendirilen tarım işletmeleri için. Oran her yıl gözden geçirilir – emin değilseniz danışmanınıza sorun.', '§ 24 UStG uyarınca çiftçiler için ortalama oran: %{r}.'],
+    it: ['7,8% – forfait agricoltori (§24)', 'Solo per aziende agricole in regime forfettario. L’aliquota viene rivista ogni anno – in caso di dubbi chiedi al consulente.', 'Aliquota forfettaria agricoltori ai sensi del § 24 UStG: {r} %.'],
+    fr: ['7,8 % – forfait agricole (§24)', 'Uniquement pour les exploitations au régime forfaitaire. Le taux est révisé chaque année – en cas de doute, demandez à votre conseiller.', 'Taux forfaitaire agricole selon le § 24 UStG : {r} %.']
+  };
+  Object.keys(V24).forEach(function (l) {
+    if (T[l]) { T[l].vat_24 = V24[l][0]; T[l].vat24_hint = V24[l][1]; }
+    if (window.DOC[l]) window.DOC[l].lf = V24[l][2];
+  });
   Object.keys(T).forEach(function (l) { if (window.UI[l]) Object.assign(window.UI[l], T[l]); });
 })();

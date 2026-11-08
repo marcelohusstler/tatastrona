@@ -173,6 +173,25 @@ window.VORLAGEN = [
     ['Arbeitsstunde Mechaniker', 'Roboczogodzina mechanika', 'Mechanic labour hour', 'Std', 75, 'arbeit'],
     ['Ersatzteile', 'Części zamienne', 'Spare parts', 'pauschal', 100, 'material']
   ] },
+  { id: 'landwirtschaft', name: { pl: 'Gospodarstwo rolne', de: 'Landwirtschaft & Lohnunternehmen', en: 'Farming & agricultural services' }, icon: '🚜', items: [
+    ['Pflügen', 'Orka', 'Ploughing', 'ha', 95, 'arbeit'],
+    ['Grubbern', 'Gruberowanie', 'Cultivating', 'ha', 55, 'arbeit'],
+    ['Saatbettbereitung mit Kreiselegge', 'Przygotowanie gleby broną aktywną', 'Seedbed preparation with power harrow', 'ha', 60, 'arbeit'],
+    ['Säen / Drillen', 'Siew', 'Sowing / drilling', 'ha', 55, 'arbeit'],
+    ['Mähdrusch Getreide', 'Koszenie zboża kombajnem', 'Combine harvesting, grain', 'ha', 160, 'arbeit'],
+    ['Gras mähen', 'Koszenie trawy', 'Grass mowing', 'ha', 45, 'arbeit'],
+    ['Rundballen pressen', 'Prasowanie bel okrągłych', 'Round baling', 'Stk', 9, 'arbeit'],
+    ['Ballen wickeln', 'Owijanie bel', 'Bale wrapping', 'Stk', 7, 'arbeit'],
+    ['Häckseln (Mais / Gras)', 'Sieczkowanie (kukurydza / trawa)', 'Forage harvesting (maize / grass)', 'Std', 280, 'arbeit'],
+    ['Gülle ausbringen', 'Wywóz gnojowicy', 'Slurry spreading', 'm³', 3.5, 'arbeit'],
+    ['Dünger streuen', 'Rozsiewanie nawozu', 'Fertiliser spreading', 'ha', 18, 'arbeit'],
+    ['Pflanzenschutz spritzen', 'Oprysk środkami ochrony roślin', 'Crop spraying', 'ha', 20, 'arbeit'],
+    ['Schlepperstunde mit Fahrer', 'Godzina ciągnika z operatorem', 'Tractor hour incl. driver', 'Std', 65, 'arbeit'],
+    ['Transport mit Traktor und Anhänger', 'Transport ciągnikiem z przyczepą', 'Transport with tractor and trailer', 'Std', 75, 'arbeit'],
+    ['Winterdienst mit Traktor', 'Odśnieżanie ciągnikiem', 'Snow clearing with tractor', 'Std', 85, 'arbeit'],
+    ['Heu / Stroh, Quaderballen', 'Siano / słoma, bele prostopadłościenne', 'Hay / straw, square bales', 'Stk', 45, 'sonstiges'],
+    ['Saatgut und Dünger', 'Materiał siewny i nawóz', 'Seed and fertiliser', 'pauschal', 150, 'material']
+  ] },
   { id: 'dienstleistung', name: { pl: 'Usługi / freelancer', de: 'Dienstleistung allgemein', en: 'General services' }, icon: '💼', items: [
     ['Beratung', 'Doradztwo', 'Consulting', 'Std', 70, 'sonstiges'],
     ['Projektpauschale', 'Ryczałt za projekt', 'Project flat fee', 'pauschal', 500, 'sonstiges'],

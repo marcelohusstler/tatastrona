@@ -234,3 +234,5 @@ body.is-wizard { padding-bottom: 20px; }
 .err { color: var(--red); font-size: .9rem; margin: 4px 0 10px; }
 
 .wz-import { margin-top: 14px; width: 100%; }
+
+.tr { display: block; color: var(--c2); font-size: .82rem; font-style: italic; }

@@ -13,7 +13,7 @@ Interfejs jest po polsku, a dokumenty powstają po niemiecku. Działa w przeglą
 - Lista klientów, z podziałem na osoby prywatne i firmy.
 - Oferty i faktury z automatyczną numeracją (`RE-2026-001`, `AN-2026-001`).
 - Zamiana oferty na fakturę jednym kliknięciem.
-- Szablony branżowe (Vorlagen) dla 17 branż: malarz, elektryk, hydraulik, glazurnik, suche zabudowy, podłogi, dekarz, stolarz, murarz, ogrodnik, sprzątanie, Hausmeister, przeprowadzki, opróżnianie mieszkań, okna, mechanik i usługi ogólne.
+- Szablony branżowe (Vorlagen) dla 18 branż: malarz, elektryk, hydraulik, glazurnik, suche zabudowy, podłogi, dekarz, stolarz, murarz, ogrodnik, sprzątanie, Hausmeister, przeprowadzki, opróżnianie mieszkań, okna, mechanik, gospodarstwo rolne i usługi ogólne.
 - Własny katalog pozycji z własnymi cenami.
 - VAT 19% / 7%, Reverse Charge §13b i Kleinunternehmer §19.
 - Osobno wykazane koszty robocizny (§35a EStG) oraz informacja o obowiązku przechowywania faktury (§14 UStG).
