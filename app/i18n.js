@@ -15,6 +15,7 @@ window.UNITS = {
 window.UI = {
   pl: {
     guide: 'Poradnik', nav_docs: 'Dokumenty', nav_customers: 'Klienci', nav_items: 'Pozycje', nav_company: 'Firma', saved: 'Zapisano',
+    banner_backup: '<strong>Zrób kopię zapasową:</strong> faktury są tylko na tym urządzeniu. Firma → Kopia zapasowa →',
     banner_setup: '<strong>Zacznij tutaj:</strong> uzupełnij dane swojej firmy. Bez nich faktura nie jest ważna. →',
     to_pay: 'Do zapłaty', paid_year: 'Zapłacone {y}', n_overdue: '{n} po terminie',
     new_invoice: '+ Nowa faktura', new_offer: '+ Nowa oferta', f_all: 'Wszystkie', f_inv: 'Faktury', f_off: 'Oferty',
@@ -96,6 +97,7 @@ window.UI = {
   },
   de: {
     guide: 'Anleitung', nav_docs: 'Dokumente', nav_customers: 'Kunden', nav_items: 'Positionen', nav_company: 'Firma', saved: 'Gespeichert',
+    banner_backup: '<strong>Datensicherung machen:</strong> Ihre Rechnungen liegen nur auf diesem Gerät. Firma → Datensicherung →',
     banner_setup: '<strong>Hier starten:</strong> Firmendaten ausfüllen. Ohne sie ist die Rechnung nicht gültig. →',
     to_pay: 'Offen', paid_year: 'Bezahlt {y}', n_overdue: '{n} überfällig',
     new_invoice: '+ Neue Rechnung', new_offer: '+ Neues Angebot', f_all: 'Alle', f_inv: 'Rechnungen', f_off: 'Angebote',
@@ -176,6 +178,7 @@ window.UI = {
   },
   en: {
     guide: 'Guide', nav_docs: 'Documents', nav_customers: 'Customers', nav_items: 'Items', nav_company: 'Company', saved: 'Saved',
+    banner_backup: '<strong>Make a backup:</strong> your invoices are stored only on this device. Company → Backup →',
     banner_setup: '<strong>Start here:</strong> fill in your company details. Without them the invoice is not valid. →',
     to_pay: 'Outstanding', paid_year: 'Paid {y}', n_overdue: '{n} overdue',
     new_invoice: '+ New invoice', new_offer: '+ New quote', f_all: 'All', f_inv: 'Invoices', f_off: 'Quotes',

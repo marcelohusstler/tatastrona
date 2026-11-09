@@ -142,7 +142,7 @@
     });
     net = r2(net);
     var vat = r2(net * rate / 100);
-    return { lines: lines, net: net, vat: vat, gross: r2(net + vat), rate: rate, mode: mode, labor: r2(labor), laborGross: r2(labor * (1 + rate / 100)) };
+    return { lines: lines, net: net, vat: vat, gross: r2(net + vat), rate: rate, mode: mode, labor: r2(labor), laborGross: r2(r2(labor) + r2(labor * rate / 100)) };
   }
   function dueDate(doc) { return addDays(doc.date, doc.paymentDays); }
   function isOverdue(doc) { return doc.type === 'rechnung' && doc.status === 'offen' && dueDate(doc) < today(); }
@@ -370,6 +370,7 @@
     var list = S.docs.filter(function (d) { return docFilter === 'all' || d.type === docFilter; });
     var h = '';
     if (!S.company.name) h += '<a class="banner" href="#/company">' + t('banner_setup') + '</a>';
+    else if (S.docs.length >= 3 && (!S.settings.lastBackup || (new Date(today()) - new Date(S.settings.lastBackup)) / 864e5 > 14)) h += '<a class="banner" href="#/company">' + t('banner_backup') + '</a>';
     h += '<div class="stats"><div><small>' + t('to_pay') + '</small><strong>' + money(open) + '</strong>' +
       (overdue ? '<em class="warn">' + t('n_overdue', { n: overdue }) + '</em>' : '') + '</div>' +
       '<div><small>' + t('paid_year', { y: year }) + '</small><strong>' + money(paid) + '</strong></div></div>';
@@ -933,6 +934,7 @@
     var blob = new Blob([JSON.stringify(S, null, 2)], { type: 'application/json' });
     var a = document.createElement('a'); a.href = URL.createObjectURL(blob);
     a.download = 'fakturka-backup-' + today() + '.json'; document.body.appendChild(a); a.click();
+    S.settings.lastBackup = today(); save();
     setTimeout(function () { URL.revokeObjectURL(a.href); a.remove(); }, 500);
   }
   function importData(file) {
